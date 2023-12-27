@@ -9,14 +9,14 @@ trait GeneralTrait
     {
         return app()->getLocale();
     }
-    // يييي
-    public function returnError($errNum, $msg)
+
+    public function returnError( $msg)
     {
         return response()->json([
             'status' => false,
-            'errNum' => $errNum,
+            // 'errNum' => $errNum,
             'msg' => $msg
-        ]);
+        ],200);
     }
 
 
@@ -33,21 +33,21 @@ trait GeneralTrait
     {
         return response()->json([
             'status' => true,
-            'errNum' => "200",
+            // 'errNum' => "200",
             'msg' => $msg,
             $key => $value
         ]);
     }
-    
      public function returnDataa($key, $value, $msg)
     {
         return response()->json([
             'status' => true,
-            'errNum' => "200",
+            // 'errNum' => "200",
             'msg' => $msg,
             $key => $value
-        ]);
+        ],200);
     }
+
 
     //////////////////
     public function returnValidationError($code = "E001", $validator)
@@ -72,10 +72,6 @@ trait GeneralTrait
             return '404';
 
         else if ($input == "mobile")
-            return '404';
-        else if ($input == "phone")
-            return '404';
-        else if ($input == "device_token")
             return '404';
 
         else if ($input == "id_number")

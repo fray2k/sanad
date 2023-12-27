@@ -35,11 +35,7 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/css/tables/extensions/colReorder.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/css/tables/extensions/fixedColumns.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/css/tables/datatable/select.dataTables.min.css')}}">
-
-   
     <link rel="stylesheet" href="{{asset('admin/vendors/css/forms/selects/select2.min.css')}}">
-
-
    <script src="{{asset('js/app.js')}}"></script>
 
 

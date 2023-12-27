@@ -30,16 +30,16 @@
                 </div>
                 <div class="card-content collpase show">
                   <div class="card-body">
-                    <form action="{{route('products.store')}}" method="POST" name="le_form"  enctype="multipart/form-data">
-                      @csrf
+                    <form action="{{route('products.update',$product->id)}}" method="POST" name="le_form"  enctype="multipart/form-data">
+                    @csrf
+                    @method('put')
                       <div class="row form-row">
-                      
                             <div class="form-group col-md-4 col-sm-6">
-                                <label> البائع</label>
+                                <label>البائع  </label>
                                 <select class="form-control select" name="user_id">
                                     <option>اختر </option>
                                     @foreach ($users as $user)
-                                        <option value="{{$user->id}}" >{{$user->name}}</option>
+                                        <option value="{{$user->id}}" {{($user->id==$product->user_id) ? 'selected' : '' }}>{{$user->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -48,7 +48,7 @@
                                 <select class="form-control select" name="category_id">
                                     <option>اختر نوع العقار</option>
                                     @foreach ($categories as $_item)
-                                        <option value="{{$_item->id}}" >{{$_item->name}}</option>
+                                        <option value="{{$_item->id}}" {{($_item->id==$product->category_id) ? 'selected' : '' }}>{{$_item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -56,8 +56,8 @@
                                 <label>المدينة </label>
                                 <select class="form-control select" name="city_id">
                                     <option>اختر المدينة</option>
-                                    @foreach ($cities as $_item)
-                                        <option value="{{$_item->id}}" >{{$_item->name}}</option>
+                                    @foreach ($cities as $city)
+                                        <option value="{{$city->id}}" {{($city->id==$product->city_id) ? 'selected' : '' }}>{{$city->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -65,14 +65,14 @@
                                 <label>المنطقة </label>
                                 <select class="form-control select" name="state_id">
                                     <option>اختر المنطقة</option>
-                                    @foreach ($states as $_item)
-                                        <option value="{{$_item->id}}" >{{$_item->name}}</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{$state->id}}" {{($state->id==$product->state_id) ? 'selected' : '' }}>{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-6 col-sm-6">
                                 <label>عنوان / اسم العقار</label>
-                                <input type="text" name="title" class="form-control" value="{{old('title')}}" id="titlearid">
+                                <input type="text" name="title" class="form-control" value="{{$product->title}}" id="titlearid">
                                 @error('title')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -80,7 +80,7 @@
                             </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label>سعر العقار</label>
-                            <input type="text" name="price" class="form-control" value="{{old('price')}}" id="titlearid">
+                            <input type="text" name="price" class="form-control" value="{{$product->price}}" id="titlearid">
                             @error('price')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -88,7 +88,7 @@
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label>نوع الاعلان اجار/بيع</label>
-                            <input type="text" name="type" class="form-control" value="{{old('type')}}" id="titlearid">
+                            <input type="text" name="type" class="form-control" value="{{$product->type}}" id="titlearid">
                             @error('type')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -96,7 +96,7 @@
                         </div>
                         <div class="form-group col-md-6 col-sm-6">
                             <label>مكان أو عنوان العقار</label>
-                            <input type="text" name="address" class="form-control" value="{{old('address')}}" id="titlearid">
+                            <input type="text" name="address" class="form-control" value="{{$product->address}}" id="titlearid">
                             @error('address')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -104,7 +104,7 @@
                         </div>
                         <div class="form-group col-md-6 col-sm-6">
                             <label> موقع أو لوكشن العقار علي الخريطه  </label>
-                            <input type="text" name="location" class="form-control" value="{{old('location')}}" id="titlearid">
+                            <input type="text" name="location" class="form-control" value="{{$product->location}}" id="titlearid">
                             @error('location')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -112,7 +112,7 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label>عرض العقار كام متر</label>
-                            <input type="text" name="width" class="form-control" value="{{old('width')}}" id="titlearid">
+                            <input type="text" name="width" class="form-control" value="{{$product->state_id}}" id="titlearid">
                             @error('width')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -120,7 +120,7 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label>طول العقار كام متر </label>
-                            <input type="text" name="height" class="form-control" value="{{old('height')}}" id="titlearid">
+                            <input type="text" name="height" class="form-control" value="{{$product->height}}" id="titlearid">
                             @error('height')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -128,7 +128,7 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label>اجمالي مساحة العاقر</label>
-                            <input type="text" name="total_area" class="form-control" value="{{old('total_area')}}" id="titlearid">
+                            <input type="text" name="total_area" class="form-control" value="{{$product->total_area}}" id="titlearid">
                             @error('total_area')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -136,7 +136,7 @@
                         </div>
                          <div class="form-group col-md-3 col-sm-6">
                             <label>سنة البناء</label>
-                            <input type="text" name="year" class="form-control" value="{{old('year')}}" id="titlearid">
+                            <input type="text" name="year" class="form-control" value="{{$product->year}}" id="titlearid">
                             @error('year')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -144,7 +144,7 @@
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label> عدد الحمامات</label>
-                            <input type="text" name="bathrooms" class="form-control" value="{{old('bathrooms')}}" id="titlearid">
+                            <input type="text" name="bathrooms" class="form-control" value="{{$product->bathrooms}}" id="titlearid">
                             @error('bathrooms')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -152,7 +152,7 @@
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label>عدد الغرف</label>
-                            <input type="text" name="rooms" class="form-control" value="{{old('rooms')}}" id="titlearid">
+                            <input type="text" name="rooms" class="form-control" value="{{$product->rooms}}" id="titlearid">
                             @error('rooms')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -160,7 +160,7 @@
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label>عدد الادوار</label>
-                            <input type="text" name="role" class="form-control" value="{{old('role')}}" id="titlearid">
+                            <input type="text" name="role" class="form-control" value="{{$product->role}}" id="titlearid">
                             @error('role')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -169,7 +169,7 @@
                         
                         <div class="form-group col-md-6 col-sm-6">
                             <label>وصف العقار</label>
-                            <textarea name="description"  cols="30" rows="3"  class="form-control" id="target_groupid">{{old('description')}}</textarea>
+                            <textarea name="description"  cols="30" rows="3"  class="form-control" id="target_groupid">{{$product->description}}</textarea>
                             <!--<input type="text" name="detailid" class="form-control" value="{{old('detailid')}}" id="detailid">-->
                             @error('target_group')
                             <span class="text-danger">{{$message}}</span>
@@ -184,7 +184,7 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label>اسم الشخص المعلن</label>
-                            <input type="text" name="name" class="form-control" value="{{old('name')}}" id="titlearid">
+                            <input type="text" name="name" class="form-control" value="{{$product->name}}" id="titlearid">
                             @error('name')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -192,7 +192,7 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label>اميل الشخص المعلن</label>
-                            <input type="text" name="email" class="form-control" value="{{old('email')}}" id="titlearid">
+                            <input type="text" name="email" class="form-control" value="{{$product->email}}" id="titlearid">
                             @error('name')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -200,7 +200,7 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label>هاتف الشخص المعلن</label>
-                            <input type="text" name="phone" class="form-control" value="{{old('phone')}}" id="titlearid">
+                            <input type="text" name="phone" class="form-control" value="{{$product->phone}}" id="titlearid">
                             @error('phone')
                             <span class="text-danger">{{$message}}</span>
                             @enderror

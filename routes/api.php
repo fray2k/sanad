@@ -21,26 +21,23 @@ Route::group(['middleware' => ['api'], 'namespace' => 'Api'], function () {
     Route::get('/admin', function () {
         return 'bbbb';
     });
-    // Route::post('verify-code', [AuthLoginController::class, 'verifyCode'])->name('verify-code');
-    Route::post('login', 'AuthLoginController@LoginUser')->name('login-user');
+   
+    Route::post('login', 'AuthController@login');
+  	Route::post('register', 'AuthController@register');
+    Route::post('forget-password', 'AuthController@forgetPassword');
+    Route::post('profile-update', 'AuthController@profileUpdate');
+    Route::get('user-data', 'AuthController@getUserData');
+    Route::get('all-courses', 'AuthController@allcourses');
+    Route::get('allcourses-lives', 'AuthController@allcoursesLive');
+    Route::post('change_password', 'AuthController@change_password');
+    Route::post('forgetpassword', 'AuthController@forgetPassword');
 
-    Route::post('register', 'AuthLoginController@registerNewUser')->name('user-signup');
-    Route::post('verify-register-code', 'AuthLoginController@verifyRegisterCode')->name('verify-register-code');
-    
-    Route::get('user-data', 'AuthLoginController@getUserData');
-    Route::post('profile-update', 'AuthLoginController@ProfileUpdate');
 
-    Route::post('forget-password', 'AuthLoginController@forgetPassword');
-    Route::post('verify-password-code', 'AuthLoginController@verifyPassword');
-    Route::post('reset-user-password-post', 'AuthLoginController@resetUserPasswordPost');
 
-    Route::get('cities', 'HomeController@cities');
-    Route::get('states', 'HomeController@states');
-    Route::get('categotries', 'HomeController@categotries');
-    Route::get('products', 'HomeController@products');
-    Route::get('product-detais', 'HomeController@productDetais');
-    Route::get('products-search', 'HomeController@productsSearch');
-    Route::get('products-features', 'HomeController@features');
+
+
+
+
     Route::get('favorites', 'HomeController@favorites');
     Route::get('vendor-products', 'HomeController@vendorProducts');
     

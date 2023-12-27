@@ -51,6 +51,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'instructors' => [
+            'driver' => 'session',
+            'provider' => 'instructors',
+            
+        ],
     ],
 
     /*
@@ -80,6 +85,16 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'instructors' => [
+            'driver' => 'eloquent',
+            'model' => App\Instructor::class,
+        ],
+        'instructors-api' => [
+            'driver' => 'jwt',
+            'provider' => 'instructors',
+            'hash' => false,
+            
+        ],
     ],
 
     /*
