@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group(['middleware' => ['api'], 'namespace' => 'Api'], function () {
     Route::get('/admin', function () {
-        return 'bbbb';
+        return 'bbbbffff';
     });
    
     Route::post('login', 'AuthController@login');
