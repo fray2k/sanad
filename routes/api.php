@@ -17,24 +17,26 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::group(['middleware' => ['api'], 'namespace' => 'Api'], function () {
+Route::group(['middleware' => ['api','changeLanguage'], 'namespace' => 'Api'], function () {
     Route::get('/admin', function () {
         return 'bbbbffff';
     });
    
     Route::post('login', 'AuthController@login');
   	Route::post('register', 'AuthController@register');
+    Route::get('user-data', 'AuthController@getUserData');
+    
     Route::post('forget-password', 'AuthController@forgetPassword');
     Route::post('profile-update', 'AuthController@profileUpdate');
-    Route::get('user-data', 'AuthController@getUserData');
+   
     Route::get('all-courses', 'AuthController@allcourses');
     Route::get('allcourses-lives', 'AuthController@allcoursesLive');
-    Route::post('change_password', 'AuthController@change_password');
+    Route::post('change_password', 'AuthController@changePassword');
     Route::post('forgetpassword', 'AuthController@forgetPassword');
 
 
-
-
+    Route::get('categotries', 'HomeController@categotries');
+    Route::get('courses', 'HomeController@courses');
 
 
 

@@ -36,8 +36,12 @@ Route::get('home', 'Admin/DashBoardController@index');
     Route::get('forgot/password', 'Auth\UserLoginController@forgotPassword');
     Route::post('forgot/password', 'Auth\UserLoginController@submitForgot')->name('forgot.password.post');
         
-    Route::get('reset-user-password/{token}', 'Auth\UserLoginController@resetUserPasswordGet')->name('reset-user-password');
-    Route::post('reset-user-password', 'Auth\UserLoginController@resetUserPasswordPost')->name('reset-user-password.post');
+    Route::get('reset-user-password/{token}', 'Auth\InstructorLoginController@resetUserPasswordGet')->name('reset-user-password');
+    Route::post('reset-user-password', 'Auth\InstructorLoginController@resetUserPasswordPost')->name('reset-user-password.post');
+        
+        
+  Route::get('reset-password-api/{token}', 'Auth\InstructorLoginController@resetPasswordGetApi')->name('reset-password-api');
+  Route::post('reset-password-api', 'Auth\InstructorLoginController@resetPasswordPostApi')->name('reset-password-post-api');
         
         
         

@@ -53,4 +53,16 @@ class Instructor extends Authenticatable implements JWTSubject
     {
       return $this->hasMany(Curriculum::class,'instructor_id','id');
     }
+    public function scopeSelection($query)
+    {
+        return $query->select(
+        	'id',
+        	'first_name' . ' as first_name',
+        	'last_name' . ' as last_name',
+        	'email'. ' as email',
+        	'mobile'  . ' as mobile',
+        	'photo' . ' as photo',
+        	'detail'  . ' as detail',
+        );
+    }
 }

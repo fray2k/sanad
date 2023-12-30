@@ -14,7 +14,7 @@ use Crypt;
 use Session;
 use App\City;
 use App\Category;
-use App\Product;
+use App\Course;
 use App\State;
 use App\Feature;
 use App\User;
@@ -42,10 +42,21 @@ class HomeController extends Controller
 
     public function categotries(Request $request)
     {    
-        $categotries = Category::get();   
+        $categotries = Category::selection()->get();   
        
         return $this -> returnDataa(
             'data',$categotries,''
+        );
+    }
+    public function courses(Request $request)
+    {    
+        if($request->category_id){
+            $courses = Course::selection()->where('category_id',$request->category_id)->get();  
+        }else{
+            $courses = Course::selection()->get();  
+        }
+        return $this -> returnDataa(
+            'data',$courses,''
         );
     }
 

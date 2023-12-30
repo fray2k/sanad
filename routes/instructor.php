@@ -81,7 +81,7 @@ Route::group(['middleware' => 'checkInstructor','namespace' => 'Instructor','pre
     Route::post('remove-acount','ProfileController@removeAcount')->name('remove-acount');
 
     
-    Route::resource('straights','LiveCourseController');    
+    Route::resource('courses','LiveCourseController');    
     Route::get('live-joined/{id}', 'LiveCourseController@liveJoined');
     
     Route::get('transfers', 'BillController@transfers')->name('transfers'); 

@@ -56,6 +56,12 @@ return [
             'provider' => 'instructors',
             
         ],
+        'instructors-api' => [
+            'driver' => 'jwt',
+            'provider' => 'instructors',
+            'hash' => false,
+            
+        ],
     ],
 
     /*
@@ -89,12 +95,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Instructor::class,
         ],
-        'instructors-api' => [
-            'driver' => 'jwt',
-            'provider' => 'instructors',
-            'hash' => false,
-            
-        ],
+        
     ],
 
     /*

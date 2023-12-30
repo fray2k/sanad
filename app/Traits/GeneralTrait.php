@@ -10,12 +10,13 @@ trait GeneralTrait
         return app()->getLocale();
     }
 
-    public function returnError( $msg)
+    public function returnError( $msg,$validator='')
     {
         return response()->json([
             'status' => false,
             // 'errNum' => $errNum,
-            'msg' => $msg
+            'msg' => $msg,
+            'massage'=>$validator
         ],200);
     }
 
@@ -55,7 +56,6 @@ trait GeneralTrait
         return $this->returnError($code, $validator->errors()->first());
     }
 
-
     public function returnCodeAccordingToInput($validator)
     {
         $inputs = array_keys($validator->errors()->toArray());
@@ -67,13 +67,14 @@ trait GeneralTrait
     {
         if ($input == "name")
             return '404';
-
+        else if ($input == "email")
+            return __('front.email required');
         else if ($input == "password")
-            return '404';
-
+            return __('front.password required');
         else if ($input == "mobile")
             return '404';
-
+        elseif($input="device_token")
+        return __('front.device_token required');
         else if ($input == "id_number")
             return '404';
 
@@ -83,8 +84,7 @@ trait GeneralTrait
         else if ($input == "agreement")
             return '404';
 
-        else if ($input == "email")
-            return '404';
+        
 
         else if ($input == "city_id")
             return '404';

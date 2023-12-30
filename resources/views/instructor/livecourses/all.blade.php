@@ -22,7 +22,7 @@
                     </div>
                     <div class="content-header-right col-md-6 col-12">
                       <div class="dropdown float-md-right">
-                           <a href="{{route('straights.create')}}"  class="btn btn-primary float-right mt-2">إضافة دورة</a>
+                           <a href="{{route('courses.create')}}"  class="btn btn-primary float-right mt-2">إضافة دورة</a>
                       </div>
                     </div>
                      
@@ -171,7 +171,7 @@
                                                                         <div class="col-sm-3">
                                                                         </div>
                                                                         <div class="col-sm-2">
-                                                                            <form method="post" action="{{route('straights.destroy','test')}}">
+                                                                            <form method="post" action="{{route('courses.destroy','test')}}">
                                                                                  @csrf
                                                                                  @method('delete')
                                                                                  <input type="hidden" name="id" id="cat_id">

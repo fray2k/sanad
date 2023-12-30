@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-content collpase show">
                   <div class="card-body">
-                    <form action="{{route('straights.store')}}" method="POST" name="le_form"  enctype="multipart/form-data">
+                    <form action="{{route('courses.store')}}" method="POST" name="le_form"  enctype="multipart/form-data">
                       @csrf
                       <div class="row form-row">
                           <div class="form-group col-md-6 col-sm-12">

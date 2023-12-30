@@ -12,9 +12,11 @@ use Hash;
 use Mail;
 use Crypt;
 use Session;
+use Carbon\Carbon;
 
 use App\Instructor;
 use Illuminate\Support\Str;
+use App\Http\Requests\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -25,13 +27,14 @@ class AuthController extends Controller
             $rules = [
                 "email" => "required",
                 "password" => "required",
-                // "device_token" => "required"
+                "device_token" => "required"
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 $code = $this->returnCodeAccordingToInput($validator);
                 return $this->returnValidationError($code, $validator);
             }
+
             $checkUser = Instructor::where("email" , $request->email)->first();
             if($checkUser){
                 // if($checkUser->is_activated ==0)
@@ -41,15 +44,16 @@ class AuthController extends Controller
                   $credentials = $request->only(['email','password']);
                   $token =  Auth::guard('instructors-api') -> attempt($credentials);
                   if(!$token)
-                      return $this -> returnError('falsche Email oder Passwort');
+                      return $this -> returnError(__('front.Wrong email or password'));
 
-                  $UserData = Instructor::where("email" , $request->email)->first();
+                  $UserData = Instructor::selection()->where("email" , $request->email)->first();
                   $UserData->token=$token;
+                  $UserData->device_token=$request->device_token;
                   $UserData->save();
-                  return $this -> returnDataa('data',$UserData,'تم تسجيل الدخول بنجاح');
+                  return $this -> returnDataa('data',$UserData,__('front.logged in'));
                 // }
             }else {
-              return $this -> returnError('البريد الإلكتروني أو كلمة المرور خطأ');
+              return $this -> returnError(__('front.Wrong email or password'));
             }
         }catch (\Exception $ex){
             return $this->returnError( $ex->getMessage());
@@ -60,7 +64,7 @@ class AuthController extends Controller
    {
         $checkemail = Instructor::where("email" , $request->email)->first();
         if($checkemail){
-            return $this -> returnError('البريد الالكتروني موجود بالفعل');
+            return $this -> returnError('001',__('front.Email already exists'));
         }else{
             $token = Str::random(60);
             $add = Instructor::create([
@@ -71,7 +75,7 @@ class AuthController extends Controller
                 'password'   => Hash::make($request->password),
                 'type'=>'student'
             ]);
-            $user = Instructor::where("id" , $add->id)->first();
+            $user = Instructor::selection()->where("id" , $add->id)->first();
             $add_array = $add->toArray();
             $add_array['link'] = Str::random(32);
             DB::table('user_activations')->insert(['id_user'=>$add_array['id'],'token'=>$add_array['link']]);
@@ -80,10 +84,11 @@ class AuthController extends Controller
                 $message->subject('Sanad - Activation code');
             });
 
-            return $this -> returnDataa('data',$user,'لقد تلقيت تأكيدا عبر البريد الإلكتروني. انقر على رابط التأكيد');
+            return $this -> returnDataa('data',$user,__('front.email confirmation'));
             // return $this -> returnSuccessMessage('successfully registered');
         }
     }
+
     public function userActivation($token){
         // dd('vdvgdvgd');
         $check = DB::table('user_activations')->where('token',$token)->first();
@@ -104,66 +109,67 @@ class AuthController extends Controller
 
     public function forgetPassword(Request $request)
     {
+        $rules = array(
+           'email' => 'required|email',
+        );
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $code = $this->returnCodeAccordingToInput($validator);
+            return $this->returnValidationError($code, $validator);
+        }
+        //     $input = $request->all();
+        //     $rules = array(
+        //        'email' => 'required|email|exists:users',
+        //    );
+        //    $validator = Validator::make($input, $rules);
+        //     return $rules;
+        //    if ($validator->fails()) {
+        //        return $this->returnError($validator->errors()->first());
+        $checkemail = Instructor::where("email" , $request->email)->first();
+        if (!$checkemail) {
+            return $this -> returnError('001',__('front.email invalid'));
+        } else {
+            try {
+                $token = Str::random(64);
+                DB::table('password_resets')->insert([
+                        'email' => $request->email,
+                        'token' => $token,
+                        'created_at' => Carbon::now()
+                ]);
+                // dd($token);
+                Mail::send('emails.forgetpassword_api', ['token' => $token], function($message) use($request){
+                        $message->to($request->email);
+                        $message->subject('Reset Password');
+                });
+                $details = [
+                    'title' => 'Mail from hamada ali',
+                    'body' => 'This is for testing email using smtp',
+                    'token' => $token,
+                ];
 
-           $input = $request->all();
-           $rules = array(
-               'email' => 'required|email|exists:users',
-           );
-           $validator = Validator::make($input, $rules);
-
-           if ($validator->fails()) {
-               return $this->returnError($validator->errors()->first());
-
-           } else {
-               try {
-
-                   $user= User::where('email',$request->email)->first();
-                   if($user==null){
-
-                       return $this -> returnError('Email wurde nicht gefunden');
-                   }else{
-
-                       $token = Str::random(64);
-                       DB::table('password_resets')->insert([
-                             'email' => $request->email,
-                             'token' => $token,
-                             'created_at' => Carbon::now()
-                       ]);
-                       // dd($token);
-                       Mail::send('emails.forgetpassword', ['token' => $token], function($message) use($request){
-                             $message->to($request->email);
-                             $message->subject('Reset Password');
-                       });
-                       $details = [
-                           'title' => 'Mail from hamada ali',
-                           'body' => 'This is for testing email using smtp',
-                           'token' => $token,
-                       ];
-
-                       // \Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
+                    // \Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
 
 
-                       return $this -> returnSuccessMessage('Please visit your email');
-                   }
-               } catch (\Swift_TransportException $ex) {
-                   $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
-               } catch (Exception $ex) {
-                   $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
-               }
-           }
-           // return \Response::json('doneeeee');
-       }
+                    return $this -> returnSuccessMessage(__('front.Please visit your email'));
+                
+            } catch (\Swift_TransportException $ex) {
+                $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
+            } catch (Exception $ex) {
+                $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
+            }
+        }
+        // return \Response::json('doneeeee');
+    }
 
 
    public function changePassword(Request $request)
    {
 
-       $user = Auth::guard('user-api')->user();
+       $user = Auth::guard('instructors-api')->user();
         if(!$user)
-           return $this->returnError('You must login first');
-       // dd('cha');
+            return $this->returnError(__('front.You must login first'));
        $input = $request->all();
-       $userid = User::where("id" , $user->id)->first();
+       $userid = Instructor::where("id" , $user->id)->first();
 
        $rules = array(
            'old_password' => 'required',
@@ -176,13 +182,14 @@ class AuthController extends Controller
        } else {
            try {
                if ((Hash::check(request('old_password'), $userid->password)) == false) {
-                       return $this->returnError('Check your old password.');
+                       return $this->returnError(__('front.Check your old password'));
                }else if ((Hash::check(request('new_password'), $request->password)) == true) {
-                      return $this->returnError('lease enter a password which is not similar then current password.');
+                    return $this->returnError(__('front.not similar then current password'));
                }else {
                     $userid->password  = bcrypt($input['new_password']);
                     $userid->save();
-                    return $this -> returnDataa('data',$userid,'Password updated successfully.');
+                    return $this -> returnDataa('data',$userid,__('front.Password updated successfully'));
+                   
                }
            } catch (\Exception $ex) {
                if (isset($ex->errorInfo[2])) {
@@ -196,17 +203,15 @@ class AuthController extends Controller
        }
        // return \Response::json($arr);
    }
-     public function getUserData(Request $request)
+    public function getUserData(Request $request)
     {
         // $token = $request->bearerToken();
         // return $token;
-        $user = Auth::guard('user-api')->user();
-         if(!$user)
-            return $this->returnError('يجب تسجيل الدخول أولا');
-
-            $user->photo= "https://deutschtests.com/img/profiles/".$user->photo;
-
-
+        $user_auth = Auth::guard('instructors-api')->user();
+        if(!$user_auth)
+            return $this->returnError(__('front.You must login first'));
+        $user = Instructor::selection()->findOrFail($user_auth->id);
+        $user->photo= "https://xn--deutschprfungen-7vb.com/img/profiles/".$user->photo;
         return $this -> returnDataa(
             'data',$user,'riuhfer'
         );
@@ -214,11 +219,11 @@ class AuthController extends Controller
     public function profileUpdate(Request $request)
     {
         // return $request->all();
-        $user = Auth::guard('user-api')->user();
+        $user = Auth::guard('instructors-api')->user();
         if(!$user)
-            return $this->returnError('You must login first ');
+            return $this->returnError(__('front.You must login first'));
 
-        $edit = User::findOrFail($user->id);
+        $edit = Instructor::findOrFail($user->id);
         if($file=$request->file('photo'))
         {
             $file_extension = $request -> file('photo')->getClientOriginalExtension();
@@ -231,34 +236,34 @@ class AuthController extends Controller
             $edit->photo  = $edit->photo;
         }
 
-        if(isset($request->name)){
-            $edit->name  = $request->name;
+        if(isset($request->first_name)){
+            $edit->first_name  = $request->first_name;
         }else{
-            $edit->name  = $edit->name;
+            $edit->first_name  = $edit->first_name;
+        }
+        if(isset($request->last_name)){
+            $edit->last_name  = $request->last_name;
+        }else{
+            $edit->last_name  = $edit->last_name;
         }
         if(isset($request->mobile)){
             $edit->mobile  = $request->mobile;
         }else{
             $edit->mobile  = $edit->mobile;
         }
-        if(isset($request->country)){
-            $edit->country  = $request->country;
+        if(isset($request->detail)){
+            $edit->detail  = $request->detail;
         }else{
-            $edit->country  = $edit->country;
+            $edit->detail  = $edit->detail;
         }
-        if(isset($request->language)){
-            $edit->language  = $request->language;
-        }else{
-            $edit->language  = $edit->language;
-        }
+       
 
 
         $edit-> save();
         // return $request->all();
-        $user = User::find($edit->id);
-        $user->photo= "https://deutschtests.com/img/profiles/".$user->photo;
-        return $this -> returnDataa('data',$user,'updated successfully');
-
+        $user = Instructor::selection()->find($edit->id);
+        $user->photo= "https://xn--deutschprfungen-7vb.com/img/profiles/".$user->photo;
+        return $this -> returnDataa('data',$user,__('front.updated successfully'));
     }
     public function contactInfo()
     {

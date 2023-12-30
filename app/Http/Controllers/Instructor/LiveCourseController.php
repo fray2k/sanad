@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Instructor;
 use App\Http\Controllers\Controller;
-use App\Course;
 use App\Category;
 use App\SubCategory;
 use App\ChildCategory;
 // use App\Live;
-use App\Straight;
+use App\Course;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Str;
@@ -31,7 +30,7 @@ class LiveCourseController extends Controller
         $categories=Category::all();
         $userid = Auth::guard('instructors')->user();
 
-        $courses=Straight::where('userId',$userid->id)->get();
+        $courses=Course::where('userId',$userid->id)->get();
         return view('instructor.livecourses.all',compact('courses','categories'));
     }
 
@@ -78,7 +77,7 @@ class LiveCourseController extends Controller
         $path = 'assets_admin/img/livecourses';
         $request-> file('image') ->move($path,$file_name);
 
-        $add = new Straight;
+        $add = new Course;
         
         $add->userId    = $userid->id;
         $add->title    = $request->title;
@@ -122,7 +121,7 @@ class LiveCourseController extends Controller
 
     
    
-    public function edit(Straight $straight)
+    public function edit(Course $course)
     {
         // dd($straight->id);
         // dd($straight);
@@ -131,10 +130,10 @@ class LiveCourseController extends Controller
         $categories=Category::all();
         $subcategory=SubCategory::all();
         $childcategory=ChildCategory::all();
-        return view('instructor.livecourses.edit',compact('straight','categories','subcategory','childcategory'));
+        return view('instructor.livecourses.edit',compact('course','categories','subcategory','childcategory'));
     }
 
-    public function update(Request $request, Straight $straight)
+    public function update(Request $request, Course $course)
 
     {
         // $this->validate( $request,[          
@@ -163,7 +162,7 @@ class LiveCourseController extends Controller
         $userid = Auth::guard('instructors')->user();
         $date = date('Y-m-d');
         // dd($course->id);
-        $edit = Straight::findOrFail($straight->id);
+        $edit = Course::findOrFail($straight->id);
         if($file=$request->file('image'))
         {
             $file_extension = $request -> file('image') -> getClientOriginalExtension();
@@ -195,7 +194,7 @@ class LiveCourseController extends Controller
 
         
          
-        return redirect()->route('straights.index')->with("message", 'تم التعديل بنجاح'); 
+        return redirect()->route('courses.index')->with("message", 'تم التعديل بنجاح'); 
     }
 
 
@@ -203,14 +202,14 @@ class LiveCourseController extends Controller
     {
         // $appointment=Doctor::where('specialityId',$request->id)->get(); 
         // if(count($appointment) == 0){
-            $delete = Straight::findOrFail($request->id);
+            $delete = Course::findOrFail($request->id);
             $delete->delete();
-            return redirect()->route('straights.index')->with("message",'تم الحذف بنجاح'); 
+            return redirect()->route('courses.index')->with("message",'تم الحذف بنجاح'); 
         // }else{
         //    return redirect()->back()->with("error", 'غير مسموح حذف هذا العنصر'); 
         // }    
         
-        $delete = Straight::findOrFail($request->id);
+        $delete = Course::findOrFail($request->id);
         if($delete){
             $courses_joined= Courses_joined::where('liveId',$delete->id)->get();
             foreach ($courses_joined as $item) {         
@@ -224,7 +223,7 @@ class LiveCourseController extends Controller
             }
         }
         $delete->delete();
-        return redirect()->route('straights.index')->with("message",'تم الحذف بنجاح'); 
+        return redirect()->route('courses.index')->with("message",'تم الحذف بنجاح'); 
     } 
     
     
