@@ -10,25 +10,25 @@
 <meta name="keywords" content="">
 
 <!-- favicon -->
-<link rel="shortcut icon" href="img/favicon.png">
+<link rel="shortcut icon" href="{{asset('img/favicon.png')}}">
 
 <!-- bootstrap -->
-<link rel="stylesheet" href="front/css/bootstrap.min.css" />
+<link rel="stylesheet" href="{{asset('front/css/bootstrap.min.css')}}" />
 
 <!-- font-awesome icon -->
-<link rel="stylesheet" href="front/css/font-awesome.min.css" />
+<link rel="stylesheet" href="{{asset('front/css/font-awesome.min.css')}}" />
 
 <!-- swiper carousel -->
-<link rel="stylesheet" href="front/css/swiper.min.css">
+<link rel="stylesheet" href="{{asset('front/css/swiper.min.css')}}">
 
 <!-- bootsnav -->
-<link rel="stylesheet" href="front/css/bootsnav.css">
+<link rel="stylesheet" href="{{asset('front/css/bootsnav.css')}}">
 
 <!-- style -->
 <!-- <link rel="stylesheet" href="css/style.css" /> -->
-<link rel="stylesheet" href="front/css/style_rtl.css" />
+<link rel="stylesheet" href="{{asset('front/css/style_rtl.css')}}" />
 <!-- responsive css -->
-<link rel="stylesheet" href="front/css/responsive.css" />
+<link rel="stylesheet" href="{{asset('front/css/responsive.css')}}" />
 
 
 

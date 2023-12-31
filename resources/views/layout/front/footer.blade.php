@@ -79,21 +79,22 @@
     <!-- end scroll to top  -->
 
     <!-- javascript libraries -->
-    <script type="text/javascript" src="front/js/jquery.js"></script>
-    <script type="text/javascript" src="front/js/bootstrap.bundle.js"></script>
+    
+    <script type="text/javascript" src="{{asset('front/js/jquery.js')}}"></script>
+    <script type="text/javascript" src="{{asset('front/js/bootstrap.bundle.js')}}"></script>
 
     <!-- menu navigation -->
-    <script type="text/javascript" src="front/js/bootsnav.js"></script>
-    <script type="text/javascript" src="front/js/jquery.nav.js"></script>
+    <script type="text/javascript" src="{{asset('front/js/bootsnav.js')}}"></script>
+    <script type="text/javascript" src="{{asset('front/js/jquery.nav.js')}}"></script>
 
     <!-- magnific-popup -->
-    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('front/js/jquery.magnific-popup.min.js')}}"></script>
 
     <!-- swiper carousel -->
-    <script type="text/javascript" src="front/js/swiper.min.js"></script>
+    <script type="text/javascript" src="{{asset('front/js/swiper.min.js')}}"></script>
 
     <!-- main slider -->
-    <script src="js/slider.js"></script>
+    <script src="{{asset('front.js/slider.js')}}"></script>
 
      
      <!-- Data table -->
@@ -103,4 +104,4 @@
 
 
     <!-- setting -->
-    <script type="text/javascript" src="front/js/main.js"></script>
+    <script type="text/javascript" src="{{asset('front/js/main.js')}}"></script>
