@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/ghgcjhdscds', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('front.home');
 });
 
 Auth::routes();
@@ -23,7 +23,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'Admin\DashBoardController@index');
 
-Route::get('home', 'Admin/DashBoardController@index');
+// Route::get('home', 'Admin/DashBoardController@index');
 
 
 

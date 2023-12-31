@@ -1,5 +1,6 @@
 
-
+@extends('layout.front.main')
+@section('content')	
     <section class="form-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -78,5 +79,6 @@
         </div>
     </section>
     <!-- end login -->
-<!-- 
 
+
+@endsection
