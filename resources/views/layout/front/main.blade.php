@@ -1,6 +1,8 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
+    <?php 
+         $user_auth=Auth::guard('instructors')->user();  
+    ?>
 <head>
     @include('layout.front.head')
 </head>
@@ -14,7 +16,11 @@
         </header>   
     @endif  -->
     <header>
-        @include('layout.front.header')
+        @if($user_auth)
+            @include('layout.front.header-login')
+        @else
+            @include('layout.front.header')
+            @endif
     </header>   
     @yield('content')
     

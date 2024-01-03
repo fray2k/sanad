@@ -379,11 +379,16 @@
                                 </a>
 
                                 <div class=" bg-light text-center mt-2 pt-2 pb-2">
-                                    <a class="dropdown-item main-color font-weight-600 text-medium" href="login.html">
+                                    <a class="dropdown-item main-color font-weight-600 text-medium" href="{{ route('signoutinstructors') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
+                                    <form id="logout-form" action="{{ route('signoutinstructors') }}" method="POST" class="d-none">
+                                            @csrf
+                                    </form>
                                 </div>
                                
+                                
+
 
                             </div>
                         </div>

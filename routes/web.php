@@ -13,46 +13,58 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('front.home');
-});
+// Route::get('/home', function () {
+//     return view('front.home');
+// });
 
 Auth::routes();
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'Admin\DashBoardController@index');
+Route::get('/', 'FrontController@index');
+Route::get('/home', 'FrontController@index');
 
 // Route::get('home', 'Admin/DashBoardController@index');
 
 
 
 
-  Route::get('instructor-login', 'Auth\InstructorLoginController@UserLogin')->name('instructor-login');
-  Route::post('instructorlogin', 'Auth\InstructorLoginController@LoginUser')->name('instructorlogin');
-  Route::post('signoutinstructors', 'Auth\InstructorLoginController@signOutInstructors')->name('signoutinstructors');
+  // Route::get('instructor-login', 'Auth\InstructorLoginController@UserLogin')->name('instructor-login');
+## start login student , instructor 
+  Route::get('user-login', 'Auth\InstructorLoginController@UserLogin')->name('user-login');
+  Route::post('instructorlogin', 'Auth\InstructorLoginController@LoginUser')->name('instructorlogin');        
+# end
 
-    
-    Route::get('forgot/password', 'Auth\UserLoginController@forgotPassword');
-    Route::post('forgot/password', 'Auth\UserLoginController@submitForgot')->name('forgot.password.post');
-        
-    Route::get('reset-user-password/{token}', 'Auth\InstructorLoginController@resetUserPasswordGet')->name('reset-user-password');
-    Route::post('reset-user-password', 'Auth\InstructorLoginController@resetUserPasswordPost')->name('reset-user-password.post');
-        
-        
+## start signup student , instructor 
+  Route::get('instructor-signup', 'Auth\InstructorLoginController@instructorSignup')->name('instructor-signup');
+  Route::post('instructor-signup-post', 'Auth\InstructorLoginController@instructorSignupPost')->name('instructor-signup-post');
+  
+  Route::get('student-signup', 'Auth\InstructorLoginController@studentSignup')->name('student-signup');
+  Route::post('student-signup-post', 'Auth\InstructorLoginController@registerNewUser')->name('student-signup-post');
+## end
+
+## activation
+  Route::get('/activation/users/{token}', 'Auth\InstructorLoginController@instructorActivation');
+#end
+
+## start forgot password 
+  Route::get('forgot/password', 'Auth\InstructorLoginController@forgotPassword');
+  Route::post('forgot/password', 'Auth\InstructorLoginController@submitForgot')->name('forgot.password.post');
+## end 
+
+## start reset password student , instructor
+  Route::get('reset-user-password/{token}', 'Auth\InstructorLoginController@resetUserPasswordGet')->name('reset-user-password');
+  Route::post('reset-user-password', 'Auth\InstructorLoginController@resetUserPasswordPost')->name('reset-user-password.post');
+## end 
+
+## start reset password api
   Route::get('reset-password-api/{token}', 'Auth\InstructorLoginController@resetPasswordGetApi')->name('reset-password-api');
   Route::post('reset-password-api', 'Auth\InstructorLoginController@resetPasswordPostApi')->name('reset-password-post-api');
-        
-        
-        
-  Route::post('signoutotudent', 'Auth\UserLoginController@signOutStudent')->name('signoutotudent');
+## end 
 
-  
-  Route::get('instructor-signup', 'Auth\InstructorLoginController@instructorSignup')->name('instructor-signup');
-  Route::get('student-signup', 'Auth\InstructorLoginController@studentSignup')->name('student-signup');
-  Route::get('/activation/users/{token}', 'Auth\InstructorLoginController@instructorActivation');
+## signout student , instructor
+  Route::post('signoutinstructors', 'Auth\InstructorLoginController@signOutInstructors')->name('signoutinstructors');
+## end
 
-  Route::post('create/acount', 'Auth\InstructorLoginController@registerNewUser')->name('create.acount');
-
-  Route::post('register-new-instructor', 'Auth\InstructorLoginController@registerNewInstructor')->name('register-new-instructor');
-
+  // Route::post('signoutotudent', 'Auth\UserLoginController@signOutStudent')->name('signoutotudent');
+  // Route::post('register-new-instructor', 'Auth\InstructorLoginController@registerNewInstructor')->name('register-new-instructor');

@@ -18,7 +18,7 @@ class CheckInstructor
     {
         if(Auth::guard('instructors')->check()==false){
             // dd(Auth::guard('students')->user()->name;);
-            return redirect('login/user');
+            return redirect('user-login');
         }
         $check_student=Auth::guard('instructors')->user()->type;
         if($check_student !='instructor'){

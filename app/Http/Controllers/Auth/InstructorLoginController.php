@@ -20,15 +20,14 @@ class InstructorLoginController extends Controller
 {
     public function UserLogin()
     {   
-        // dd('hhh');
         $user = Auth::guard('instructors')->user();
         if($user)
             return redirect('/');
         $new_session_id = \Session::getId();
-        return view('instructor.login');
+        return view('front.login');
     }
 
-    public function LoginUser(request $request)
+    public function LoginUser(Request $request)
     {
         $this->validate(request(),[
             'email'    => 'required',
@@ -39,32 +38,49 @@ class InstructorLoginController extends Controller
                 'password.required'=>' كلمة المرور مطلوبة',
             ]
         );
-
         $credentials = $request -> only(['email','password']);
         $checkinstructor = Instructor::where("email" , $request->email)->first();
         if($checkinstructor){
             if($checkinstructor->is_activated ==0)
             {
-                return redirect('instructorlogin')->with("errorss", 'الحساب غير مفعل'); 
+                return redirect('user-login')->with("errorss", 'الحساب غير مفعل'); 
             }else{
                 $good = Auth::guard('instructors') -> attempt($credentials);
                 if($good) {
-                    return redirect('instructor/straights');                  
+                    if($checkinstructor->type='instructor'){
+                        return redirect('instructor/courses');    
+                    }else{
+                        return redirect('home');   
+                    }              
                 }else{
-                    return redirect('instructorlogin')->with("errorss", 'بيانات الدخول غير صحيحةة'); 
+                    return redirect('user-login')->with("errorss", 'بيانات الدخول غير صحيحةة'); 
                 }
             }
         }else{
-            return redirect('instructorlogin')->with("errorss", 'بيانات الدخول غير صحيحة'); 
+            return redirect('user-login')->with("errorss", 'بيانات الدخول غير صحيحة'); 
         }
     }
 
+    
+  
+    public function instructorSignup()
+    {   
+        $user = Auth::guard('instructors')->user();
+        if($user)
+            return redirect('/');          
+        return view('front.instructor-signup');
+    }
+    public function studentSignup()
+    {   
+        $user = Auth::guard('instructors')->user();
+        if($user)
+            return redirect('/');          
+        return view('front.student-signup');
+    }
 
     public function resetUserPasswordGet($token) {
          return view('auth.forgetpasswordlink', ['token' => $token]);
     }
-
-
     public function resetUserPasswordPost(Request $request)
     {
           // $request->validate([
@@ -106,11 +122,11 @@ class InstructorLoginController extends Controller
             return redirect('/')->with('message', 'Ihr Passwort wurde geändert! ');
 
     }
+
+## start reset for api
     public function resetPasswordGetApi($token) {
         return view('auth.forgetpasswordlink_api', ['token' => $token]);
    }
-
-
    public function resetPasswordPostApi(Request $request)
    {
          // $request->validate([
@@ -152,12 +168,13 @@ class InstructorLoginController extends Controller
            return redirect('/')->with('message', 'Ihr Passwort wurde geändert! ');
 
    }
+## end for api
 
     public function signOutInstructors() {
         $user = Auth::guard('instructors')->user(); 
         if(!$user)
-            return redirect('instructor-login');
+            return redirect('user-login');
         Auth::guard('instructors')->logout();
-        return redirect('instructor-login');
+        return redirect('user-login');
     }
 }

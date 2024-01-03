@@ -52,10 +52,14 @@ Route::get('curriculas-removeVideoSession/{id}', 'Instructor\CurriculumControlle
             
 //      return redirect(url('vendor/login'));
 //  }
-
+Route::get('/said', function () {
+    return view('front.home');
+});
 Route::group(['middleware' => 'checkInstructor','namespace' => 'Instructor','prefix' => 'instructor'], function () {
     
-    
+    Route::get('/said', function () {
+        return view('front.home');
+    });
     Route::get('indexxx','CurriculumController@indexxx');
 	
 	
