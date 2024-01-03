@@ -78,6 +78,20 @@ class InstructorLoginController extends Controller
         return view('front.student-signup');
     }
 
+    public function instructorActivation($token){
+        $check = DB::table('user_activations')->where('token',$token)->first();
+        if(!is_null($check)){
+            $user = Instructor::find($check->id_user);
+            if ($user->is_activated ==1){
+                return redirect()->to('login/user')->with('message'," الحساب مفعل ");
+            }
+            $user->update(['is_activated' => 1]);
+            DB::table('user_activations')->where('token',$token)->delete();
+            return redirect()->to('checkout')->with('message',"تم تفعيل حسابك");
+        }
+        return redirect()->to('/login/user')->with('Warning',"رمز التفعيل غير صالج");
+    }
+
     public function resetUserPasswordGet($token) {
          return view('auth.forgetpasswordlink', ['token' => $token]);
     }
