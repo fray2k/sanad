@@ -83,13 +83,13 @@ class InstructorLoginController extends Controller
         if(!is_null($check)){
             $user = Instructor::find($check->id_user);
             if ($user->is_activated ==1){
-                return redirect()->to('login/user')->with('message'," الحساب مفعل ");
+                return redirect()->to('user-login')->with('message'," الحساب مفعل ");
             }
             $user->update(['is_activated' => 1]);
             DB::table('user_activations')->where('token',$token)->delete();
-            return redirect()->to('checkout')->with('message',"تم تفعيل حسابك");
+            return redirect()->to('user-login')->with('message',"تم تفعيل حسابك");
         }
-        return redirect()->to('/login/user')->with('Warning',"رمز التفعيل غير صالج");
+        return redirect()->to('user-login')->with('errorss',"رمز التفعيل غير صالح");
     }
 
     public function resetUserPasswordGet($token) {
@@ -165,7 +165,7 @@ class InstructorLoginController extends Controller
                              ])->first();
 
          if(!$updatePassword){
-             return back()->withInput()->with('error', 'Invalid token!');
+             return back()->withInput()->with('errorss', __('Invalid token'));
          }
          $user = Instructor::where('email', $updatePassword->email)->first();
          // $user->email  = $request->email;
@@ -179,7 +179,7 @@ class InstructorLoginController extends Controller
              $langg=app()->getLocale();
          }
 
-           return redirect('/')->with('message', 'Ihr Passwort wurde geändert! ');
+           return redirect('/')->with('message', __('Your password has been changed'));
 
    }
 ## end for api

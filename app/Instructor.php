@@ -16,7 +16,7 @@ class Instructor extends Authenticatable implements JWTSubject
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password','is_activated','last_seen',
+        'name', 'email', 'password','is_activated','first_name','last_name','mobile','type'
     ];
     
 

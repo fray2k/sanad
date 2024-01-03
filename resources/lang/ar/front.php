@@ -15,5 +15,6 @@ return [
     'updated successfully' => 'تم التحديث بنجاح.',
     'email invalid'=>'البريد الإلكتروني المحدد غير صالح.',
     'Please visit your email'=>'يرجى زيارة البريد الإلكتروني الخاص بك.',
-    
+    'Invalid token'=>'رمز غير صالح!',
+    'Your password has been changed'=>'تم تغيير كلمة السر الخاصة بك',
 ];

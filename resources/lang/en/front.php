@@ -15,4 +15,6 @@ return [
     'updated successfully' => 'updated successfully.',
     'email invalid'=>'The selected email is invalid.',
     'Please visit your email'=>'Please visit your email.',
+    'Invalid token'=>'Invalid token!',
+    'Your password has been changed'=>'Your password has been changed!',
 ];

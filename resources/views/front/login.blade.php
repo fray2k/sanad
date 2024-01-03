@@ -12,12 +12,13 @@
                     </h6>
                     <hr>
                     @if(session()->has('message'))
-                                @include('admin.includes.alerts.success')
-                            @endif
+                        @include('admin.includes.alerts.success')
+                    @endif
 
-                            @if(Session::has('errorss'))                                
-                               <span class="text-danger">{{Session::get('errorss')}}</span>
-                            @endif 
+                    @if(Session::has('errorss'))                                
+                        <span class="text-danger">{{Session::get('errorss')}}</span>
+                    @endif 
+                   
 
                     <form  method="POST" action="{{route('instructorlogin')}}">
                         @csrf
