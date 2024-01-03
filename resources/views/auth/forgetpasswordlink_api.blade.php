@@ -21,14 +21,6 @@
 
 
 
-						        @if(session()->has('message'))
-				                @include('admin.includes.alerts.success')
-				            @endif
-
-				            @if(Session::has('errorss'))
-				               <span class="text-danger">{{Session::get('errorss')}}</span>
-				            @endif
-
 							<form class="form-horizontal form-simple"  novalidate method="POST" action="{{route('reset-password-post-api')}}">
                        				 @csrf
 								<input type="hidden" name="token" value="{{ $token }}">

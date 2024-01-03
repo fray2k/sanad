@@ -178,8 +178,8 @@ class InstructorLoginController extends Controller
          }else{
              $langg=app()->getLocale();
          }
-
-           return redirect('/')->with('message', __('Your password has been changed'));
+         dd($langg);
+           return redirect('user-login')->with('message', __('Your password has been changed'));
 
    }
 ## end for api
