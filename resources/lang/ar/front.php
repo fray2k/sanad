@@ -17,4 +17,8 @@ return [
     'Please visit your email'=>'يرجى زيارة البريد الإلكتروني الخاص بك.',
     'Invalid token'=>'رمز غير صالح!',
     'Your password has been changed'=>'تم تغيير كلمة السر الخاصة بك',
+    'change password'=>'تغيير كلمة المرور',
+    'enter the new password'=>'أدخل كلمة المرور الجديدة',
+    'confirm the password'=>'تأكيد كلمة المرور',
+    'save'=>'حفظ',
 ];

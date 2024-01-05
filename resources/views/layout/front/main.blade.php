@@ -10,7 +10,7 @@
 
 
 <body>
-    <!-- @if(!Request::is('login/user','instructor-signup','student-signup','register-users','traveling-signup'))
+    <!-- @if(!Request::is('user-login','instructor-signup','student-signup','register-users','traveling-signup'))
         <header>
                
         </header>   

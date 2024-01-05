@@ -7,7 +7,7 @@
 
                 <div class="col-md-4">
                      <br><br> <br>
-                    <h6>Kennwort ändern</h6>
+                    <h6>{{__('front.change password')}}</h6>
                     <hr>
 
 
@@ -27,7 +27,7 @@
 								<div class="form-group">
 
 									<div style="position:relative" id="eye-password-0">
-										<label for="email">Geben Sie das neue Passwort ein</label>
+										<label for="email">{{__('front.enter the new password')}}</label>
 										<input  type="password" class="form-control @error('password') is-invalid @enderror" name="password"  style="padding-right: 60px;">
 							    	</div>
 
@@ -39,7 +39,7 @@
 								<div class="form-group">
 
 									<div style="position:relative" id="eye-password-0">
-										<label for="email">Bestätige das Passwort</label>
+										<label for="email">{{__('front.confirm the password')}}</label>
 										<input  type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"  style="padding-right: 60px;">
 							    	</div>
 
@@ -50,7 +50,7 @@
 								</div>
 
 								<div class="form-group m-0">
-									<button type="submit" class="btn btn-primary btn-block"> speichern </button>
+									<button type="submit" class="btn btn-primary btn-block"> {{__('front.save')}} </button>
 								</div>
 
 							</form>

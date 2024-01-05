@@ -50,6 +50,9 @@ class HomeController extends Controller
     }
     public function courses(Request $request)
     {    
+        // dd(request()->getHttpHost());
+      
+
         if($request->category_id){
             $courses = Course::selection()->where('category_id',$request->category_id)->get();  
         }else{

@@ -28,6 +28,7 @@ Route::get('/home', 'FrontController@index');
 
 
 
+Route::group(['middleware' => ['changeLanguage']], function () {
 
   // Route::get('instructor-login', 'Auth\InstructorLoginController@UserLogin')->name('instructor-login');
 ## start login student , instructor 
@@ -68,3 +69,4 @@ Route::get('/home', 'FrontController@index');
 
   // Route::post('signoutotudent', 'Auth\UserLoginController@signOutStudent')->name('signoutotudent');
   // Route::post('register-new-instructor', 'Auth\InstructorLoginController@registerNewInstructor')->name('register-new-instructor');
+});	

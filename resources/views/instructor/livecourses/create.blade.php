@@ -4,7 +4,56 @@
 @section('content') 
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
   
+<script>
+function separateString() {
+    mahawirArId = document.getElementById("mahawir_arid");
+    mahawir_ar_array = mahawirArId.value.split(',');     
+    // console.log(mahawirArray[0]);
+    for (let i = 0; i < mahawir_ar_array.length; i++) {
+        console.log(mahawir_ar_array[i]);
+        $('#add_mahawir_ar').append(`
+            <input type="hidden" name="mahawir_ar_name[]" class="videovalue" value="${mahawir_ar_array[i]}" >
+        `); 
+    }
 
+    mahawirEnId = document.getElementById("mahawir_enid");
+    mahawir_en_array = mahawirEnId.value.split(',');     
+    console.log(mahawir_en_array[0]);
+    for (let i = 0; i < mahawir_en_array.length; i++) {
+      console.log(mahawir_en_array[i]);
+        $('#add_mahawir_en').append(`
+            <input type="hidden" name="mahawir_en_name[]" class="videovalue" value="${mahawir_en_array[i]}" >
+        `); 
+    }
+
+    requirementArId = document.getElementById("requirement_arid");
+    requirement_ar_array = requirementArId.value.split(',');     
+    console.log(requirement_ar_array[0]);
+    for (let i = 0; i < requirement_ar_array.length; i++) {
+      console.log(requirement_ar_array[i]);
+        $('#add_requirement_ar').append(`
+            <input type="hidden" name="requirement_ar_name[]"  value="${requirement_ar_array[i]}" >
+        `); 
+    }
+
+
+    mahawirEnId = document.getElementById("requirement_enid");
+    mahawir_en_array = mahawirEnId.value.split(',');     
+    console.log(mahawir_en_array[0]);
+    for (let i = 0; i < mahawir_en_array.length; i++) {
+      console.log(mahawir_en_array[i]);
+        $('#add_requirement_en').append(`
+            <input type="hidden" name="requirement_en_name[]"  value="${mahawir_en_array[i]}" >
+        `); 
+    }
+
+
+    
+    // return false;
+
+}
+ 
+</script>
   <div class="content-header row">
       <div class="content-header-left col-md-12 col-12 mb-2 breadcrumb-new">
                       <h3 class="content-header-title mb-0 d-inline-block">إضافة كورس مباشر جديد</h3><br>
@@ -38,22 +87,45 @@
                   <div class="card-body">
                     <form action="{{route('courses.store')}}" method="POST" name="le_form"  enctype="multipart/form-data">
                       @csrf
+                      <div class="form-group col-md-6 col-sm-12">
+                      
+                      <select name="hamadasel[]" class="select2-tokenizer form-control" multiple="" id="select2-tokenizer">
+                      
+                      </select>
+                    </div>
                       <div class="row form-row">
                           <div class="form-group col-md-6 col-sm-12">
-                            <label>عنوان الدورة </label>
-                            <input type="text" name="title" class="form-control" value="{{old('title')}}" id="titleid">
+                            <label>عنوان الدورة عربي</label>
+                            <input type="text" name="title_ar" class="form-control" value="{{old('title_ar')}}" id="titleid">
+                            @error('title_ar')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                            <span id="titleArError" style="color: red;"></span>
+                          </div>
+                          <div class="form-group col-md-6 col-sm-12">
+                            <label>عنوان الدورة انجليزي</label>
+                            <input type="text" name="title_en" class="form-control" value="{{old('title_en')}}" id="titleid">
                             @error('title')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
-                            <span id="titleError" style="color: red;"></span>
+                            <span id="titleEnError" style="color: red;"></span>
+                          </div>
+                          <div class="form-group col-md-6 col-sm-6">
+                              <label> التخصص </label>
+                              <select class="form-control select" name="category_id">
+                                  <option>اختر التخصص</option>
+                                  @foreach ($categories as $_item)
+                                      <option value="{{$_item->id}}" >{{$_item->title_ar}}</option>
+                                  @endforeach
+                              </select>
                           </div>
                           <div class="form-group col-md-6 col-sm-12">
                             <label>لغة الدورة</label>
-                            <input type="text" name="title" class="form-control" value="{{old('title')}}" id="titleid">
-                            @error('title')
+                            <input type="text" name="language" class="form-control" value="{{old('language')}}" id="titleid">
+                            @error('language')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
-                            <span id="titleError" style="color: red;"></span>
+                            <span id="languageError" style="color: red;"></span>
                           </div>
                           
                           
@@ -126,41 +198,69 @@
                                 </select>
                                 <span id="priceError" style="color: red;"></span>
                             </div>
-                          <div class="form-group col-md-12 col-sm-6">
-                            <label>شرح توضيحي عن الدورة</label>
-                            <textarea name="short_detail"  cols="30" rows="2"  class="form-control" id="short_detailid">{{old('short_detail')}}</textarea>
-                            @error('short_detail')
+                          <div class="form-group col-md-6 col-sm-6">
+                            <label> شرح توضيحي عن الدورة عربي</label>
+                            <textarea name="description_ar"  cols="30" rows="2"  class="form-control" id="short_detailid">{{old('description_ar')}}</textarea>
+                            @error('description_ar')
                               <span class="text-danger">{{$message}}</span>
                             @enderror
-                            <span id="short_detailError" style="color: red;"></span>
+                            <span id="descriptionArError" style="color: red;"></span>
+                          </div>
+                          <div class="form-group col-md-6 col-sm-6">
+                            <label>شرح توضيحي عن الدورة انجليزي</label>
+                            <textarea name="description_en"  cols="30" rows="2"  class="form-control" id="short_detailid">{{old('description_en')}}</textarea>
+                            @error('description_en')
+                              <span class="text-danger">{{$message}}</span>
+                            @enderror
+                            <span id="descriptionEnError" style="color: red;"></span>
                           </div>
                           
                           <div class="form-group col-md-6">
-                            <label> محاور الدورة</label>
-                            <input name="mahawir" type="text" class="input-selectize" value="الحافز,التدرب,الوعي الذاتي,التطور الذاتي">
-                            @error('mahawir')
+                            <label> محاور الدورة عربي</label>
+                            <input name="mahawir_ar" type="text" class="input-selectize" id="mahawir_arid" multiple>
+                            <div id="add_mahawir_ar"></div>
+                            @error('mahawir_ar')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                             <span id="mahawirError" style="color: red;"></span>
                           </div>
                           <div class="form-group col-md-6">
-                            <label>متطلبات الدورة</label>
-                            <input name="live_need" type="text" class="input-selectize" value="هتمامك بموضوع الدورة ,ورغبتك في التعلم.">
-                            @error('live_need')
+                            <label> محاور الدورة انجليزي</label>
+                            <input name="mahawir_en" type="text" class="input-selectize" id="mahawir_enid" value="الحافز,التدرب,الوعي الذاتي,التطور الذاتي" multiple>
+                            <div id="add_mahawir_en"></div>
+                            @error('mahmahawir_enawir')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
-                            <span id="liveNeedError" style="color: red;"></span>
+                            <span id="mahawirError" style="color: red;"></span>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>متطلبات الدورة عربي</label>
+                            <input name="course_requirement_ar[]" type="text" class="input-selectize" id="requirement_arid" value="هتمامك بموضوع الدورة ,ورغبتك في التعلم.">
+                            <div id="add_requirement_ar"></div>
+                            @error('course_requirement_ar')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                            <span id="courseRequirementArError" style="color: red;"></span>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>متطلبات الدورة انجليزي</label>
+                            <input name="course_requirement_en[]" type="text" class="input-selectize" id="requirement_enid" value="هتمامك بموضوع الدورة ,ورغبتك في التعلم.">
+                            <div id="add_requirement_en"></div>
+                            @error('course_requirement_en')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                            <span id="courseRequirementEnError" style="color: red;"></span>
                           </div>
                             
                           <div class="form-group col-sm-6 ">
-                              <label> فيديو تعريفي عن الدورة </label>
+                              <label>صورة تعريفية عن الدورة </label>
                               <input type="file" name="image" class="form-control" accept=".JPEG,.JPG,.PNG,.GIF,.TIF,.TIFF" id="imageid">
                               <span id="imageError" style="color: red;"></span>
                           </div>
                           <div class="form-group col-sm-6 ">
-                            <label>صورة تعريفية عن الدورة </label>
-                            <input type="file" name="image" class="form-control" accept=".JPEG,.JPG,.PNG,.GIF,.TIF,.TIFF" id="imageid">
-                            <span id="imageError" style="color: red;"></span>
+                            <label> فيديو تعريفي عن الدورة </label>
+                            <input type="file" name="video" class="form-control" accept=".JPEG,.JPG,.PNG,.GIF,.TIF,.TIFF" id="videoid">
+                            <span id="videoError" style="color: red;"></span>
                           </div>
                       </div>
                       <!--<div class="col-md-12"><hr/></div>-->
@@ -169,7 +269,7 @@
 
                       <div class="col-12 col-md-12">
                         <div class="form-group col-12 col-md-4">
-                          <button type="submit" class="btn btn-primary btn-block" onclick="return Validateallinput()">حفظ </button>
+                          <button type="submit" class="btn btn-primary btn-block" onclick="return separateString()">حفظ </button>
                         </div> 
                         <div class="loader-wrapper col-md-4" >
                             <div class="loader-container">
@@ -210,7 +310,8 @@
 
   function Validateallinput() {
     
-    
+   
+
     var titleid = document.getElementById("titleid");
     var titleError = document.getElementById("titleError");
     

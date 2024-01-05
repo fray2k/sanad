@@ -11,7 +11,20 @@ class Course extends Model
     {
         return $query->select(
         	'id',
-        	'title_' . app()->getLocale() . ' as title'
+            'user_id',
+            'category_id',
+        	'title_' . app()->getLocale() . ' as title',
+            'description_' . app()->getLocale() . ' as description',
+            'date',
+            'time',
+            'duration',
+            'language',
+            'payed',
+            'price',
+            'image',
+            'meeting_url'
+            
+
         );
     }
 }

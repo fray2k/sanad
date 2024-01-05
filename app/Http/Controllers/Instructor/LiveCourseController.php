@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Str;
 use App\Courses_joined;
-use App\Lecture;
+use App\SubTitle;
+use App\CourseRequirement;
+
 use App\Instructor;
 use App\Country;
 class LiveCourseController extends Controller
@@ -30,7 +32,7 @@ class LiveCourseController extends Controller
         $categories=Category::all();
         $userid = Auth::guard('instructors')->user();
 
-        $courses=Course::where('userId',$userid->id)->get();
+        $courses=Course::where('user_id',$userid->id)->get();
         return view('instructor.livecourses.all',compact('courses','categories'));
     }
 
@@ -44,78 +46,99 @@ class LiveCourseController extends Controller
     
     public function store(Request $request)
     { 
-        $this->validate( $request,[          
-                'title'=>'required',
-                'short_detail'=>'required',
-                'target_group'=>'required',
-                'mahawir'=>'required',
-                'date'=>'required',
-                'time'=>'required',
-                'duration'=>'required',
-                // 'payed'=>'required',
-                // 'price'=>'required',
-                // 'image' => 'required|jpeg,jpg,png,gif'
-            ],
-            [
-                'title.required'=>' العنوان مطلوب ',   
-                'short_detail.required'=>' يرجى كتابة وصف قصير ',
-                'target_group.required'=>' يرجي إدخال الفئة المستهدفة',
-                'mahawir.required'=>'ادخل محاور الدورة',
-                'date.required'=>'ادخل تاريخ بداية الكورس',
-                'time.required'=>'يرجى اختيار وقت الدورة',
-                'duration.required'=>' مدة الكورس مطلوبة ',
-                // 'payed.required'=>' حدد الكورس مدفوع ام مجاني ',
-               // 'price.required'=>' سعر الكورس مطلوب ',
-                // 'image.required'=>' يرجي إختيار صورة jpeg,jpg,png,gif ',
-            ]
-        );
+        // $this->validate( $request,[          
+        //         'title'=>'required',
+        //         'short_detail'=>'required',
+        //         'target_group'=>'required',
+        //         'mahawir'=>'required',
+        //         'date'=>'required',
+        //         'time'=>'required',
+        //         'duration'=>'required',
+        //         'payed'=>'required',
+        //         'price'=>'required',
+        //         'image' => 'required|jpeg,jpg,png,gif'
+        //     ],
+        //     [
+        //         'title.required'=>' العنوان مطلوب ',   
+        //         'short_detail.required'=>' يرجى كتابة وصف قصير ',
+        //         'target_group.required'=>' يرجي إدخال الفئة المستهدفة',
+        //         'mahawir.required'=>'ادخل محاور الدورة',
+        //         'date.required'=>'ادخل تاريخ بداية الكورس',
+        //         'time.required'=>'يرجى اختيار وقت الدورة',
+        //         'duration.required'=>' مدة الكورس مطلوبة ',
+        //         'payed.required'=>' حدد الكورس مدفوع ام مجاني ',
+        //        'price.required'=>' سعر الكورس مطلوب ',
+        //         'image.required'=>' يرجي إختيار صورة jpeg,jpg,png,gif ',
+        //     ]
+        // );
+        // dd($request->all());
         // dd($request->all());
         $userid = Auth::guard('instructors')->user();
         $file_extension = $request -> file('image') -> getClientOriginalExtension();
         $file_name = time().'.'.$file_extension;
         $file_nameone = $file_name;
-        $path = 'assets_admin/img/livecourses';
+        $path = 'img/livecourses';
         $request-> file('image') ->move($path,$file_name);
 
+        // $file_extension2 = $request -> file('video') -> getClientOriginalExtension();
+        // $file_name2 = time().'.'.$file_extension2;
+        // $file_nameone2 = $file_name2;
+        // $path2 = 'img/livecourses';
+        // $request-> file('video') ->move($path2,$file_name2);
+        
         $add = new Course;
         
-        $add->userId    = $userid->id;
-        $add->title    = $request->title;
+        $add->user_id    = $userid->id;
+        $add->category_id    = $request->category_id;
         $add->title_ar    = $request->title_ar;
-        $add->short_detail    = $request->short_detail;
-        $add->target_group    = $request->target_group;
-        $add->mahawir    = $request->mahawir;
+        $add->title_en    = $request->title_en;
+        $add->description_ar    = $request->description_ar;
+        $add->description_en    = $request->description_en;
         
         $add->date    = $request->date;
         $add->time    = $request->time;
         $add->duration    = $request->duration;
-        $add->slug =Str::slug($request->title, '-', Null);
+        $add->slug_ar =Str::slug($request->title_ar, '-', Null);
+        $add->slug_en =Str::slug($request->title_en, '-', Null);
+        $add->language    = $request->language;
         $add->payed    = $request->payed;
         if($request->price){
             $add->price    = $request->price;
         }
         $add->image    = $file_name;
+        // $add->video    = $file_name2;
         $add->save();
 
 
-        // $length = count($request->sessiontitle);
-        // if($length > 0)
-        // {
-        //     for($i=0; $i<$length; $i++)
-        //     {
-        //         $add_lecture = new Lecture;
-        //         $add_lecture->liveId    = $add->id;
-        //         $add_lecture->title    = $request->sessiontitle[$i];
-        //         $add_lecture->date    = $request->sessiondate[$i];
-        //         $add_lecture->time    = $request->time[$i];
-        //         $add_lecture->duration    = $request->sessionduration[$i];
-        //         $add_lecture->url    = $request->url[$i];
-        //         $add_lecture->meeting_password    = $request->meeting_password[$i];
-        //         $add_lecture->meeting_id    = $request->meeting_id[$i];
-        //         $add_lecture->save();
-        //     }
+        $length = count($request->mahawir_ar_name);
+        if($length > 0)
+        {
+            for($i=0; $i<$length; $i++)
+            {
+                $add_lecture = new SubTitle;
+                $add_lecture->course_id    = $add->id;
+                $add_lecture->name_ar    = $request->mahawir_ar_name[$i];
+                $add_lecture->name_en    = $request->mahawir_en_name[$i];
+                
+                $add_lecture->save();
+                
+                
+            }
              
-        // }
+        }
+        $length = count($request->requirement_ar_name);
+        if($length > 0)
+        {
+            for($i=0; $i<$length; $i++)
+            {  
+                $add_lecture = new CourseRequirement;
+                $add_lecture->course_id    = $add->id;
+                $add_lecture->name_ar  = $request->requirement_ar_name[$i];
+                $add_lecture->name_en    = $request->requirement_en_name[$i];
+                $add_lecture->save();
+            }
+             
+        }
         return redirect()->back()->with("message", 'تم الإضافة بنجاح'); 
     }
 
@@ -128,9 +151,8 @@ class LiveCourseController extends Controller
         // $dd=Course::where('id',$course->id)->first();
         // dd($course);
         $categories=Category::all();
-        $subcategory=SubCategory::all();
-        $childcategory=ChildCategory::all();
-        return view('instructor.livecourses.edit',compact('course','categories','subcategory','childcategory'));
+       
+        return view('instructor.livecourses.edit',compact('course','categories'));
     }
 
     public function update(Request $request, Course $course)

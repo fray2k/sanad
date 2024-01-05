@@ -211,7 +211,7 @@ class AuthController extends Controller
         if(!$user_auth)
             return $this->returnError(__('front.You must login first'));
         $user = Instructor::selection()->findOrFail($user_auth->id);
-        $user->photo= "https://xn--deutschprfungen-7vb.com/img/profiles/".$user->photo;
+        $user->photo= request()->getHttpHost()."/img/profiles/".$user->photo;
         return $this -> returnDataa(
             'data',$user,'riuhfer'
         );
@@ -262,7 +262,7 @@ class AuthController extends Controller
         $edit-> save();
         // return $request->all();
         $user = Instructor::selection()->find($edit->id);
-        $user->photo= "https://xn--deutschprfungen-7vb.com/img/profiles/".$user->photo;
+        $user->photo= request()->getHttpHost()."/img/profiles/".$user->photo;
         return $this -> returnDataa('data',$user,__('front.updated successfully'));
     }
     public function contactInfo()

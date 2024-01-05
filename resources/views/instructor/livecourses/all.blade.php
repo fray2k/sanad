@@ -138,7 +138,7 @@
                                             <button type="button" class="btn btn-outline-success "><i class="la la-users"></i></button>
                                             <span class="editcourse">المسجلين ف الدورة</span>
                                         </a>
-                                        <a href="{{route('straights.edit',$_item->id)}}"  class="edit-course">
+                                        <a href="{{route('courses.edit',$_item->id)}}"  class="edit-course">
                                              <button type="button" class="btn btn-outline-success "><i class="la la-edit"></i></button>
                                              <span class="editcourse">تعديل الدورة</span>
                                         </a>

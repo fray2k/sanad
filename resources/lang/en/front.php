@@ -17,4 +17,8 @@ return [
     'Please visit your email'=>'Please visit your email.',
     'Invalid token'=>'Invalid token!',
     'Your password has been changed'=>'Your password has been changed!',
+    'change password'=>'change password',
+    'enter the new password'=>'Enter the new password',
+    'confirm the password'=>'Confirm the password',
+    'save'=>'Save',
 ];

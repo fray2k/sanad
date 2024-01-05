@@ -173,12 +173,12 @@ class InstructorLoginController extends Controller
          $user-> save();
 
          DB::table('password_resets')->where(['email'=> $updatePassword->email])->delete();
-         if(session()->get('locale')){
-             $langg=session()->get('locale');
-         }else{
-             $langg=app()->getLocale();
-         }
-         dd($langg);
+        //  if(session()->get('locale')){
+        //      $langg=session()->get('locale');
+        //  }else{
+        //      $langg=app()->getLocale();
+        //  }
+        //  dd($langg);
            return redirect('user-login')->with('message', __('Your password has been changed'));
 
    }
