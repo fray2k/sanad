@@ -10,7 +10,7 @@ class Category extends Model
     {
         return $query->select(
         	'id',
-        	'title_' . app()->getLocale() . ' as name'
+        	'title_' . app()->getLocale() . ' as title'
         );
     }
     // use HasTranslations;
