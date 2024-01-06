@@ -23,6 +23,8 @@ use App\ProductImage;
 use App\Favorite;
 use Illuminate\Support\Str;
 use App\Visit;
+// use Illuminate\Http\Resources\CourseResource;
+use App\Http\Resources\CourseResource;
 class HomeController extends Controller
 {
 
@@ -58,8 +60,10 @@ class HomeController extends Controller
         }else{
             $courses = Course::selection()->get();  
         }
+        // return response()->json(CourseResource::collection($courses));
+
         return $this -> returnDataa(
-            'data',$courses,''
+            'data',CourseResource::collection($courses),''
         );
     }
 

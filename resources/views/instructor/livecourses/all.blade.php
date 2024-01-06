@@ -78,7 +78,7 @@
                             <tr>
                                 <td>
                                     <a href="profile" class="avatar avatar-sm mr-2">
-                                        <img class="avatar-img" src="{{asset('assets_admin/img/livecourses/'.$_item->image) }}" alt="Speciality">
+                                        <img class="avatar-img" src="{{asset('img/livecourses/'.$_item->image) }}" alt="Speciality">
                                     </a>
                                 </td>
                                 <td>{{ $_item->title }}</td>                                                

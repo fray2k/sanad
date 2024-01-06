@@ -16,8 +16,12 @@ use App\CourseRequirement;
 
 use App\Instructor;
 use App\Country;
+use App\Traits\ImageUploadTrait;
+
 class LiveCourseController extends Controller
 {
+    use ImageUploadTrait;
+
     public function __construct()
     {
         $this->middleware(Auth::guard('instructors')->user());
@@ -71,14 +75,15 @@ class LiveCourseController extends Controller
         //         'image.required'=>' يرجي إختيار صورة jpeg,jpg,png,gif ',
         //     ]
         // );
-        // dd($request->all());
-        // dd($request->all());
+        $file_name = $this->upload($request, 'image', 'img/courses');
+        $video_name = $this->upload($request, 'video', 'img/courses/video');
+        
         $userid = Auth::guard('instructors')->user();
-        $file_extension = $request -> file('image') -> getClientOriginalExtension();
-        $file_name = time().'.'.$file_extension;
-        $file_nameone = $file_name;
-        $path = 'img/livecourses';
-        $request-> file('image') ->move($path,$file_name);
+        // $file_extension = $request -> file('image') -> getClientOriginalExtension();
+        // $file_name = time().'.'.$file_extension;
+        // $file_nameone = $file_name;
+        // $path = 'img/courses';
+        // $request-> file('image') ->move($path,$file_name);
 
         // $file_extension2 = $request -> file('video') -> getClientOriginalExtension();
         // $file_name2 = time().'.'.$file_extension2;
@@ -106,7 +111,7 @@ class LiveCourseController extends Controller
             $add->price    = $request->price;
         }
         $add->image    = $file_name;
-        // $add->video    = $file_name2;
+        $add->video    = $video_name;
         $add->save();
 
 

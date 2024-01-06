@@ -22,6 +22,7 @@ class Course extends Model
             'payed',
             'price',
             'image',
+            'video',
             'meeting_url'
             
 
