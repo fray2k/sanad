@@ -15,7 +15,7 @@ trait GeneralTrait
         return response()->json([
             'status' => false,
             // 'errNum' => $errNum,
-            'msg' => $msg,
+            'msg' => $validator
             // 'massage'=>$validator
         ],200);
     }
@@ -71,8 +71,6 @@ trait GeneralTrait
             return __('front.email required');
         else if ($input == "password")
             return __('front.password required');
-        else if ($input == "confirm_password")
-            return __('front.confirm_password');
         else if ($input == "mobile")
             return '404';
         elseif($input="device_token")
@@ -83,7 +81,9 @@ trait GeneralTrait
         else if ($input == "birth_date")
             return '404';
 
-       
+        else if ($input == "agreement")
+            return '404';
+
         
 
         else if ($input == "city_id")

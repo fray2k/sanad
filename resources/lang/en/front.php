@@ -3,6 +3,7 @@
 return [
     'email required' => 'The email field is required',
     'password required' => 'The password field is required.',
+    'confirm_password'=>'The confirm password field is required,confirm password and new password must match.',
     'device_token required' => 'The device token field is required.',
     'logged in' => 'You have been logged in successfully.',
     'Wrong email or password' => 'Wrong email or password.',
@@ -21,4 +22,5 @@ return [
     'enter the new password'=>'Enter the new password',
     'confirm the password'=>'Confirm the password',
     'save'=>'Save',
+
 ];

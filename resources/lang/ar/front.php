@@ -3,6 +3,7 @@
 return [
     'email required' => 'البريد الإلكتروني مطلوب',
     'password required' => 'كلمة المرور مطلوبة',
+    'confirm_password'=>'حقل تأكيد كلمة المرور مطلوب , يجب أن تتطابق كلمة المرور المؤكدة وكلمة المرور الجديدة.',
     'device_token required' => 'The device token field is required.',
     'logged in' => 'تم تسجيل الدخول بنجاح',
     'Wrong email or password' => 'البريد الإلكتروني أو كلمة المرور خاطئة',

@@ -63,6 +63,18 @@ class AuthController extends Controller
 
    public function register(Request $request)
    {
+        $rules = [
+            "first_name" => "required",
+            "last_name" => "required",
+            "mobile" => "required",
+            "email" => "required",
+            "password" => "required"
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $code = $this->returnCodeAccordingToInput($validator);
+            return $this->returnValidationError($code, $validator);
+        }
         $checkemail = Instructor::where("email" , $request->email)->first();
         if($checkemail){
             return $this -> returnError('001',__('front.Email already exists'));
@@ -154,9 +166,11 @@ class AuthController extends Controller
                     return $this -> returnSuccessMessage(__('front.Please visit your email'));
                 
             } catch (\Swift_TransportException $ex) {
-                $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
+                // $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
+                return $this -> returnError('400', $ex->getMessage());
             } catch (Exception $ex) {
-                $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
+                return $this -> returnError('400', $ex->getMessage());
+                // $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
             }
         }
         // return \Response::json('doneeeee');
@@ -165,23 +179,30 @@ class AuthController extends Controller
 
    public function changePassword(Request $request)
    {
-
-       $user = Auth::guard('instructors-api')->user();
-        if(!$user)
+       $userid = Auth::guard('instructors-api')->user();
+        if(!$userid)
             return $this->returnError(__('front.You must login first'));
        $input = $request->all();
-       $userid = Instructor::where("id" , $user->id)->first();
-
-       $rules = array(
-           'old_password' => 'required',
-           'new_password' => 'required',
-           'confirm_password' => 'required|same:new_password',
-       );
-       $validator = Validator::make($input, $rules);
-       if ($validator->fails()) {
-           return $this->returnError($validator->errors()->first());
-       } else {
-           try {
+        //    $userid = Instructor::where("id" , $user->id)->first();
+           $rules = array(
+               'old_password' => 'required',
+               'new_password' => 'required',
+               'confirm_password' => 'required|same:new_password',
+           );
+           $validator = Validator::make($input, $rules);
+           if ($validator->fails()) {
+               return $this->returnError($validator->errors()->first());
+        // $rules = [
+        //     "old_password" => "required",
+        //     "new_password" => "required",
+        //     "confirm_password" => "required"
+        // ];
+        // $validator = Validator::make($request->all(), $rules);
+        // if ($validator->fails()) {
+        //     $code = $this->returnCodeAccordingToInput($validator);
+        //     return $this->returnValidationError($code, $validator);
+        }else {
+            try {
                if ((Hash::check(request('old_password'), $userid->password)) == false) {
                        return $this->returnError(__('front.Check your old password'));
                }else if ((Hash::check(request('new_password'), $request->password)) == true) {
