@@ -211,7 +211,6 @@ class AuthController extends Controller
                     $userid->password  = bcrypt($input['new_password']);
                     $userid->save();
                     return $this -> returnDataa('data',$userid,__('front.Password updated successfully'));
-                   
                }
            } catch (\Exception $ex) {
                if (isset($ex->errorInfo[2])) {
