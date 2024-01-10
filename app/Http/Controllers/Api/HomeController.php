@@ -20,7 +20,7 @@ use App\Feature;
 use App\User;
 use App\Setting;
 use App\ProductImage;
-use App\Favorite;
+use App\Courses_joined;
 use Illuminate\Support\Str;
 use App\Visit;
 // use Illuminate\Http\Resources\CourseResource;
@@ -86,36 +86,25 @@ class HomeController extends Controller
                          ->with('categories')
                          ->with('course_requirements')
                          ->with('course_subtitle')
+                        //  ->with('user_courses_joined')
                          ->selection()
                          ->where('id',$request->course_id)
                          ->first();
         
-        if(!$course)  
-                return $this -> returnError('','not found'); 
-        if($course->image){
-            $course->image=request()->getHttpHost()."/img/courses/".$course->image;
+        if(!$course)
+            return $this -> returnError('','not found'); 
+        $user = Auth::guard('instructors-api')->user(); 
+        if($user){
+            $user_joined = Courses_joined::where("student_id" , $user->id)->where("course_id" ,$request->course_id)->first();
+        }else{
+            $user_joined=null;
         }
-        if($course->video){
-            $course->video=request()->getHttpHost()."/img/courses/".$course->video;
-        }
-
-       
-        
-        
-        // $product->category= Category::where('id',$product->category_id)->first();  
-        // $product->user = User::where('id',$product->user_id)->first();   
-        // $product_image = ProductImage::where('product_id',$product->id)->first();  
-        // $product->image="https://elnamat.com/poems/araqi/img/product/".$product_image->image;
-        // $ProductImage=ProductImage::where('product_id',$product->id)->get();
-        // foreach ($ProductImage as $item) {
-        //     $item->image="https://elnamat.com/poems/araqi/img/product/".$item->image;
-        // }
-        // $product->images=$ProductImage;
-        // return $this -> returnDataa(
-        //     'data',$course,''
-        // );
+        $data  =[  
+            'details'=>new CourseResource($course),
+            'user_joined'=>$user_joined,                           
+        ];
         return $this -> returnDataa(
-            'data',$course,''
+            'data',$data,''
         );
     }
     public function products(Request $request)

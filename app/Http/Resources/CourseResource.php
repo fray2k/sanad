@@ -28,13 +28,15 @@ class CourseResource extends JsonResource
                 'language'=>$this->language,
                 'payed'=>$this->payed,
                 'price'=>$this->price,
-                'image'=>request()->getHttpHost()."/img/courses/".$this->image,
-                'video'=>request()->getHttpHost()."/img/courses/video/".$this->video,
+                'image'=>url('/img/courses/' . $this->image),
+                'video'=>url('/img/courses/video/' . $this->video),
                 'meeting_url'=>$this->meeting_url,
-                // 'instructor'=>$this->course_instructor,
-                // 'categories'=>$this->categories,
+                'instructor_image'=>$this->course_instructor,
+                'instructorimage'=>$this->course_instructor->photo,
+                'categories'=>$this->categories,
                 'requirements'=>$this->course_requirements,
-                'subtitle'=>$this->course_subtitle
+                'subtitle'=>$this->course_subtitle,
+                'course_joined'=>count($this->user_courses_joined)
             ];
         }else{
             return [
@@ -49,13 +51,15 @@ class CourseResource extends JsonResource
                 'language'=>$this->language,
                 'payed'=>$this->payed,
                 'price'=>$this->price,
-                'image'=>request()->getHttpHost()."/img/courses/".$this->image,
+                'image'=>url('/img/courses/' . $this->image),
                 'video'=>$this->video,
                 'meeting_url'=>$this->meeting_url,
-                // 'instructor'=>$this->course_instructor,
-                // 'categories'=>$this->categories,
+                'instructor'=>$this->course_instructor,
+                'instructor_image'=>url('/img/profiles/'.$this->course_instructor->photo),
+                'categories'=>$this->categories,
                 'requirements'=>$this->course_requirements,
-                'subtitle'=>$this->course_subtitle
+                'subtitle'=>$this->course_subtitle,
+                'course_joined'=>count($this->user_courses_joined)
             ];
         }
     }

@@ -16,11 +16,16 @@ class Course extends Model
     {
       return $this->hasMany(SubTitle::class,'course_id','id')->selection();
     }
+    public function user_courses_joined()
+    {
+      return $this->hasMany(Courses_joined::class,'course_id','id');
+    }
     public function categories() {
         return $this->belongsTo(Category::class,"category_id","id")->selection();
     }
     public function course_instructor() {
-        return $this->belongsTo(Instructor::class,"user_id","id")->selection();
+      return $this->belongsTo(Instructor::class,"user_id","id")->selection();
+
     }
     public function scopeSelection($query)
     {

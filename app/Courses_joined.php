@@ -10,11 +10,8 @@ class Courses_joined extends Model
 
     public function courses()
     {
-        return $this->belongsTo(Course::class, 'courseId', 'id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
     
-    public function lives()
-    {
-        return $this->belongsTo(Live::class, 'liveId', 'id');
-    }
+   
 }
