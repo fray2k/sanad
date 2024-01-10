@@ -54,14 +54,24 @@ class HomeController extends Controller
     {    
         
         if($request->category_id){
-            $courses = Course::with('course_requirements')->with('course_subtitle')->selection()->where('category_id',$request->category_id)->get();  
+            $courses = Course::with('course_instructor')
+                ->with('categories')
+                ->with('course_requirements')
+                ->with('course_subtitle')
+                ->with('user_courses_joined')->selection()->where('category_id',$request->category_id)->get();  
         }elseif($request->title){
-            $courses = Course::with('course_requirements')->with('course_subtitle')->selection()->where('title_ar', 'LIKE', $request->title.'%')->orWhere('title_en', 'LIKE', $request->title.'%')->get();
+            $courses = Course::with('course_instructor')
+                ->with('categories')
+                ->with('course_requirements')
+                ->with('course_subtitle')
+                ->with('user_courses_joined')->selection()->where('title_ar', 'LIKE', $request->title.'%')->orWhere('title_en', 'LIKE', $request->title.'%')->get();
         }else{
-            $courses = Course::with('course_requirements')->with('course_subtitle')->selection()->get();  
+            $courses = Course::with('course_instructor')
+                ->with('categories')
+                ->with('course_requirements')
+                ->with('course_subtitle')
+                ->with('user_courses_joined')->selection()->get();  
         }
-        // return response()->json(CourseResource::collection($courses));
-
         return $this -> returnDataa(
             'data',CourseResource::collection($courses),''
         );
@@ -86,7 +96,7 @@ class HomeController extends Controller
                          ->with('categories')
                          ->with('course_requirements')
                          ->with('course_subtitle')
-                        //  ->with('user_courses_joined')
+                         ->with('user_courses_joined')
                          ->selection()
                          ->where('id',$request->course_id)
                          ->first();
