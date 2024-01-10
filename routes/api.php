@@ -37,7 +37,8 @@ Route::group(['middleware' => ['api','changeLanguage'], 'namespace' => 'Api'], f
 
     Route::get('categotries', 'HomeController@categotries');
     Route::get('courses', 'HomeController@courses');
-
+    Route::get('course-detais', 'HomeController@coursesDetais');
+    
 
 
     Route::get('favorites', 'HomeController@favorites');

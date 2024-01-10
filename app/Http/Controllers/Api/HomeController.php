@@ -52,13 +52,13 @@ class HomeController extends Controller
     }
     public function courses(Request $request)
     {    
-        // dd(request()->getHttpHost());
-      
-
+        
         if($request->category_id){
-            $courses = Course::selection()->where('category_id',$request->category_id)->get();  
+            $courses = Course::with('course_requirements')->with('course_subtitle')->selection()->where('category_id',$request->category_id)->get();  
+        }elseif($request->title){
+            $courses = Course::with('course_requirements')->with('course_subtitle')->selection()->where('title_ar', 'LIKE', $request->title.'%')->orWhere('title_en', 'LIKE', $request->title.'%')->get();
         }else{
-            $courses = Course::selection()->get();  
+            $courses = Course::with('course_requirements')->with('course_subtitle')->selection()->get();  
         }
         // return response()->json(CourseResource::collection($courses));
 
@@ -80,39 +80,42 @@ class HomeController extends Controller
         );
     }
     
-    public function productDetais(Request $request)
+    public function coursesDetais(Request $request)
     {   
-        $product = Product::where('id',$request->product_id)->first();
-        if(!$product)  
-                return $this -> returnError('','هذا العقار غير موجود'); 
-                
-        $client_ip=$request->getClientIp(); 
-        $count = $product->visitViewer;
-        // dd($count->viewer.'-'.$client_ip);
-        if($count){
-            if($count->client_ip != $client_ip){
-                $count->viewer = $count->viewer + 1;
-            }
-        }else{
-            $count = new Visit;
-            $count->viewer = "1";
-            $count->client_ip=$client_ip;
-        }
-        $product->visitViewer()->save($count);
+        $course = Course::with('course_instructor')
+                         ->with('categories')
+                         ->with('course_requirements')
+                         ->with('course_subtitle')
+                         ->selection()
+                         ->where('id',$request->course_id)
+                         ->first();
         
-        $product->city= City::where('id',$product->city_id)->first();  
-        $product->category= Category::where('id',$product->category_id)->first();  
-        $product->state = State::where('id',$product->state_id)->first();
-        $product->user = User::where('id',$product->user_id)->first();   
-        $product_image = ProductImage::where('product_id',$product->id)->first();  
-        $product->image="https://elnamat.com/poems/araqi/img/product/".$product_image->image;
-        $ProductImage=ProductImage::where('product_id',$product->id)->get();
-        foreach ($ProductImage as $item) {
-            $item->image="https://elnamat.com/poems/araqi/img/product/".$item->image;
+        if(!$course)  
+                return $this -> returnError('','not found'); 
+        if($course->image){
+            $course->image=request()->getHttpHost()."/img/courses/".$course->image;
         }
-        $product->images=$ProductImage;
+        if($course->video){
+            $course->video=request()->getHttpHost()."/img/courses/".$course->video;
+        }
+
+       
+        
+        
+        // $product->category= Category::where('id',$product->category_id)->first();  
+        // $product->user = User::where('id',$product->user_id)->first();   
+        // $product_image = ProductImage::where('product_id',$product->id)->first();  
+        // $product->image="https://elnamat.com/poems/araqi/img/product/".$product_image->image;
+        // $ProductImage=ProductImage::where('product_id',$product->id)->get();
+        // foreach ($ProductImage as $item) {
+        //     $item->image="https://elnamat.com/poems/araqi/img/product/".$item->image;
+        // }
+        // $product->images=$ProductImage;
+        // return $this -> returnDataa(
+        //     'data',$course,''
+        // );
         return $this -> returnDataa(
-            'data',$product,''
+            'data',$course,''
         );
     }
     public function products(Request $request)
