@@ -15,16 +15,17 @@ use Session;
 use App\City;
 use App\Category;
 use App\Course;
-use App\State;
-use App\Feature;
+use App\Video;
+use App\Introduction;
 use App\User;
 use App\Setting;
-use App\ProductImage;
+use App\Slider;
 use App\Courses_joined;
 use Illuminate\Support\Str;
 use App\Visit;
-// use Illuminate\Http\Resources\CourseResource;
 use App\Http\Resources\CourseResource;
+use App\Http\Resources\SliderResource;
+use App\Http\Resources\VideoResource;
 class HomeController extends Controller
 {
 
@@ -75,6 +76,28 @@ class HomeController extends Controller
         return $this -> returnDataa(
             'data',CourseResource::collection($courses),''
         );
+    }
+
+    public function home(Request $request)
+    {    
+        $courses = Course::with('course_instructor')
+            ->with('categories')
+            ->with('course_requirements')
+            ->with('course_subtitle')
+            ->with('user_courses_joined')->selection()->latest()->take(20)->get();  
+        $sliders = Slider::get(); 
+        $introductions = Introduction::get(); 
+        $videos = Video::get();  
+        $data  =[  
+            'courses'=>CourseResource::collection($courses),
+            'sliders'=>SliderResource::collection($sliders),
+            'introductions'=>$introductions,                     
+            'videos'=>VideoResource::collection($videos),                     
+        ];
+        return $this -> returnDataa(
+            'data',$data,''
+        );
+        
     }
 
     public function states(Request $request)

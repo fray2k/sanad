@@ -14,6 +14,10 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin','prefix' => 'admin'
    Route::resource('countries','CountryController');
    Route::resource('cities','CityController');
    Route::resource('states','StateController');
+   Route::resource('sliders','SliderController');
+   Route::resource('introductions','IntroductionController');
+   Route::resource('videos','VideoController');
+
    
    Route::get('settings','SettingController@settings');
    Route::post('settings/update','SettingController@updateSettings');
