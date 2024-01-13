@@ -217,14 +217,14 @@
 								<div class="form-group">
 									<label>العنوان عربي</label>
 									<input type="text" name="title_ar" class="form-control"
-										value="{{$_item->title_ar}}">
+										>
 								</div>
 							</div>
 							<div class="col-12 col-sm-6">
 								<div class="form-group">
 									<label>العنوان انجليزي</label>
 									<input type="text" name="title_en" class="form-control"
-										value="{{$_item->title_en}}">
+										>
 								</div>
 							</div>
 							
