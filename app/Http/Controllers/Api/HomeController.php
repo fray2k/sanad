@@ -148,7 +148,7 @@ class HomeController extends Controller
     {    
         $settings = Setting::get();   
         return $this -> returnDataa(
-            'data',$settings,''
+            'data',CourseResource::collection($settings),''
         );
     }
 
