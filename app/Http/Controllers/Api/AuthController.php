@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Traits\GeneralTrait;
+use App\Traits\ImageUploadTrait;
 
 use DB;
 use Hash;
@@ -21,6 +22,7 @@ use App\Http\Requests\LoginRequest;
 class AuthController extends Controller
 {
     use GeneralTrait;
+    use ImageUploadTrait;
     public function login(Request $request)
     {
         try {
@@ -50,7 +52,9 @@ class AuthController extends Controller
                   $UserData->token=$token;
                   $UserData->device_token=$request->device_token;
                   $UserData->save();
-                  $UserData->photo= request()->getHttpHost()."/img/profiles/".$UserData->photo;
+                 
+                  $UserData->photo=$this->getFile('/img/profiles/students/',$UserData->photo,'/img/profiles/');
+                 
                   return $this -> returnDataa('data',$UserData,__('front.logged in'));
                 // }
             }else {
@@ -232,7 +236,8 @@ class AuthController extends Controller
         if(!$user_auth)
             return $this->returnError(__('front.You must login first'));
         $user = Instructor::selection()->findOrFail($user_auth->id);
-        $user->photo= request()->getHttpHost()."/img/profiles/".$user->photo;
+        // $user->photo= request()->getHttpHost()."/img/profiles/students/".$user->photo;
+        $user->photo=$this->getFile('/img/profiles/students/',$user->photo,'/img/profiles/');
         return $this -> returnDataa(
             'data',$user,'riuhfer'
         );
@@ -250,7 +255,7 @@ class AuthController extends Controller
             $file_extension = $request -> file('photo')->getClientOriginalExtension();
             $file_name = time().'.'.$file_extension;
             $file_nameone = $file_name;
-            $path = 'img/profiles';
+            $path = 'img/profiles/students';
             $request-> file('photo') ->move($path,$file_name);
             $edit->photo  = $file_nameone;
         }else{
@@ -283,7 +288,8 @@ class AuthController extends Controller
         $edit-> save();
         // return $request->all();
         $user = Instructor::selection()->find($edit->id);
-        $user->photo= request()->getHttpHost()."/img/profiles/".$user->photo;
+        // $user->photo= request()->getHttpHost()."/img/profiles/students/".$user->photo;
+        $user->photo=$this->getFile('/img/profiles/students/',$user->photo,'/img/profiles/');
         return $this -> returnDataa('data',$user,__('front.updated successfully'));
     }
     public function contactInfo()

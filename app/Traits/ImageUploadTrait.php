@@ -16,6 +16,14 @@ trait ImageUploadTrait
         }
         return null;
     }
+    public function getFile( $directory,$image,$filenull) {
+        if($image){
+            return $photo= url($directory.''.$image);
+        }else{
+            return $photo= url($filenull.'profile.jpeg');
+        }
+        return null;
+    }
 }
 
 

@@ -31,12 +31,14 @@ class CourseResource extends JsonResource
                 'image'=>url('/img/courses/' . $this->image),
                 'video'=>url('/img/courses/video/' . $this->video),
                 'meeting_url'=>$this->meeting_url,
-                'instructor_image'=>$this->course_instructor,
-                'instructorimage'=>$this->course_instructor->photo,
+                'instructor'=>$this->course_instructor,
+                'instructor_image'=>url('/img/profiles/'.$this->course_instructor->photo),
                 'categories'=>$this->categories,
                 'requirements'=>$this->course_requirements,
                 'subtitle'=>$this->course_subtitle,
-                'course_joined'=>count($this->user_courses_joined)
+                'course_joined'=>count($this->user_courses_joined),
+                'user_joined'=>  (count($this->user_joined) >=1)  ? 'true' : 'false',
+                // 'user_joinede'=> $this->user_joined
             ];
         }else{
             return [
@@ -59,7 +61,9 @@ class CourseResource extends JsonResource
                 'categories'=>$this->categories,
                 'requirements'=>$this->course_requirements,
                 'subtitle'=>$this->course_subtitle,
-                'course_joined'=>count($this->user_courses_joined)
+                'course_joined'=>count($this->user_courses_joined),
+                'user_joined'=>  (count($this->user_joined) >=1)  ? 'true' : 'false',
+                // 'user_joinede'=> $this->user_joined
             ];
         }
     }

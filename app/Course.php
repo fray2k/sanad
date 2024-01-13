@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class Course extends Model
 {
     protected $table = 'courses';
@@ -20,6 +20,18 @@ class Course extends Model
     {
       return $this->hasMany(Courses_joined::class,'course_id','id');
     }
+    public function user_joined()
+    {
+      $student_auth=Auth::guard('instructors-api')->user();
+      if($student_auth){
+        return $this->hasMany(Courses_joined::class,'course_id','id')->where('student_id',$student_auth->id);
+      }else{
+        return $this->hasMany(Courses_joined::class,'course_id','id')->where('student_id',0);
+      }
+      
+      // return $this->hasOne('App\Follow')->where('user_id', Auth::user()->id);
+    }
+    
     public function categories() {
         return $this->belongsTo(Category::class,"category_id","id")->selection();
     }
@@ -27,6 +39,7 @@ class Course extends Model
       return $this->belongsTo(Instructor::class,"user_id","id")->selection();
 
     }
+
     public function scopeSelection($query)
     {
         return $query->select(
