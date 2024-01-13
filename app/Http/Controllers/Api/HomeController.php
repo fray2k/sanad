@@ -94,7 +94,7 @@ class HomeController extends Controller
             ->with('user_joined')->selection()->latest()->take(20)->get();  
         $sliders = Slider::get(); 
         $introductions = Introduction::selection()->get(); 
-        $videos = Video::get();  
+        $videos = Video::selection()->get();  
         $data  =[  
             'courses'=>CourseResource::collection($courses),
             'sliders'=>SliderResource::collection($sliders),

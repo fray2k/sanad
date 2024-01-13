@@ -17,7 +17,9 @@ class VideoResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id'=>$this->id,
+            'title'=>$this->title,
             'video'=>url('/img/videos/' . $this->video),
+            'image'=>url('/img/videos/image/' . $this->image),
         ];
     }
 }

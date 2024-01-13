@@ -46,7 +46,7 @@ class Course extends Model
         	'id',
             'user_id',
             'category_id',
-        	'title_' . app()->getLocale() . ' as title',
+        	  'title_' . app()->getLocale() . ' as title',
             'description_' . app()->getLocale() . ' as description',
             'date',
             'time',
