@@ -27,6 +27,8 @@ use App\Http\Resources\CourseResource;
 use App\Http\Resources\SliderResource;
 use App\Http\Resources\VideoResource;
 use App\Http\Resources\InstructorResource;
+use App\Http\Resources\SettingResource;
+
 use App\Instructor;
 class HomeController extends Controller
 {
@@ -148,7 +150,7 @@ class HomeController extends Controller
     {    
         $settings = Setting::selection()->get();   
         return $this -> returnDataa(
-            'data',CourseResource::collection($settings),''
+            'data',SettingResource::collection($settings),''
         );
     }
 
