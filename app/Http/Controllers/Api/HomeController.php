@@ -146,7 +146,7 @@ class HomeController extends Controller
 
     public function settings(Request $request)
     {    
-        $settings = Setting::get();   
+        $settings = Setting::selection()->get();   
         return $this -> returnDataa(
             'data',CourseResource::collection($settings),''
         );
