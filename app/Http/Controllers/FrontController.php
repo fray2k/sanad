@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Slider;
+
 class FrontController extends Controller
 {
    
     public function index()
     {
         $isLogedin = Auth::guard('instructors')->user();
-        // dd($isLogedin);
-        return view('front.home',compact('isLogedin'));
+        $sliders=Slider::all();
+        return view('front.home',compact('isLogedin','sliders'));
     }
 }

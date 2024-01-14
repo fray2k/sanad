@@ -37,7 +37,7 @@ class CourseResource extends JsonResource
                 'requirements'=>$this->course_requirements,
                 'subtitle'=>$this->course_subtitle,
                 'course_joined'=>count($this->user_courses_joined),
-                'user_joined'=>  (count($this->user_joined) >=1)  ? 'true' : 'false',
+                'user_joined'=>  (count($this->user_joined) >=1)  ? true : false,
                 // 'user_joinede'=> $this->user_joined
             ];
         }else{
@@ -62,7 +62,7 @@ class CourseResource extends JsonResource
                 'requirements'=>$this->course_requirements,
                 'subtitle'=>$this->course_subtitle,
                 'course_joined'=>count($this->user_courses_joined),
-                'user_joined'=>  (count($this->user_joined) >=1)  ? 'true' : 'false',
+                'user_joined'=>  (count($this->user_joined) >=1)  ? true : false,
                 // 'user_joinede'=> $this->user_joined
             ];
         }

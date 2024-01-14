@@ -74,34 +74,38 @@
     </footer>
     <!-- end footer -->
 
-    <!-- start scroll to top -->
     <a class="scroll-top-arrow" href="javascript:void(0);"><i class="fas fa-arrow-up"></i></a>
-    <!-- end scroll to top  -->
-
     <!-- javascript libraries -->
-    
     <script type="text/javascript" src="{{asset('front/js/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('front/js/bootstrap.bundle.js')}}"></script>
-
     <!-- menu navigation -->
     <script type="text/javascript" src="{{asset('front/js/bootsnav.js')}}"></script>
     <script type="text/javascript" src="{{asset('front/js/jquery.nav.js')}}"></script>
-
     <!-- magnific-popup -->
     <script src="{{asset('front/js/jquery.magnific-popup.min.js')}}"></script>
-
     <!-- swiper carousel -->
     <script type="text/javascript" src="{{asset('front/js/swiper.min.js')}}"></script>
-
     <!-- main slider -->
-    <script src="{{asset('front.js/slider.js')}}"></script>
+    <script src="{{asset('front/js/slider.js')}}"></script>
 
-     
-     <!-- Data table -->
+    <!-- Data table -->
      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
+    <!-- setting -->
+    
+
+
+
+
+
+
+
+     <!-- Data Tables -->
+     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+     <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+     <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
  
 
+<script type="text/javascript" src="{{asset('front/js/main.js')}}"></script>
 
-    <!-- setting -->
-    <script type="text/javascript" src="{{asset('front/js/main.js')}}"></script>

@@ -2,22 +2,23 @@
 @section('content')	
      <!-- start slider section -->
      <article class="slider">
+        <!-- @foreach ($sliders as $_item)
+            <section class="slide">
+                <img src="{{asset('img/sliders/'.$_item->image) }}" alt="">
+
+                <div class="slide-content">
+                    <h2 class="slide-title">Online Courses</h2>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        <br>
+                        Lorem Ipsum has been the industry's.
+                    </p>
+                </div>
+            </section>
+        @endforeach -->
+        
         <section class="slide">
-            <img src="img/slider/slide1.jpg" alt="">
-
-            <div class="slide-content">
-                <h2 class="slide-title">Online Courses</h2>
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    <br>
-                    Lorem Ipsum has been the industry's.
-                </p>
-            </div>
-
-        </section>
-
-        <section class="slide">
-            <img src="img/slider/slide2.jpg" alt="">
+            <img src="img/sliders/1704956320.jpeg" alt="">
 
             <div class="slide-content">
                 <h2 class="slide-title">Learn Anytime</h2>
