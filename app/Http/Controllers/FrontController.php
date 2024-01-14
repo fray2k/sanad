@@ -39,4 +39,16 @@ class FrontController extends Controller
         // dd($course);
         return view('front.course-details',compact('course'));
     }
+    public function about()
+    {
+        return view('front.about');
+    }
+    public function policy()
+    {
+        return view('front.policy');
+    }
+    public function contact()
+    {
+        return view('front.contact');
+    }
 }

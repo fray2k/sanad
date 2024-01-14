@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\ContactInfo;
+use App\Setting;
 use App\Category;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,7 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $cont = ContactInfo::first();
+        $cont = Setting::first();
+        // dd($cont);
         view()->share('contact', $cont);
 
         // $allcategories=[];

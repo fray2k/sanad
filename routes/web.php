@@ -32,7 +32,11 @@ Route::group(['middleware' => ['changeLanguage']], function () {
   Route::get('/home', 'FrontController@index');
   Route::get('/course/{sluge}', 'FrontController@index');
   Route::get('course/{slug}/{id}', 'FrontController@coursesDetails');
+  Route::get('about', 'FrontController@about');
+  Route::get('policy', 'FrontController@policy');
+  Route::get('contact', 'FrontController@contact');
 
+  
   // Route::get('instructor-login', 'Auth\InstructorLoginController@UserLogin')->name('instructor-login');
 ## start login student , instructor 
   Route::get('user-login', 'Auth\InstructorLoginController@UserLogin')->name('user-login');
