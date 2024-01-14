@@ -21,8 +21,6 @@ Auth::routes();
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'FrontController@index');
-Route::get('/home', 'FrontController@index');
 
 // Route::get('home', 'Admin/DashBoardController@index');
 
@@ -30,43 +28,48 @@ Route::get('/home', 'FrontController@index');
 
 Route::group(['middleware' => ['changeLanguage']], function () {
 
+  Route::get('/', 'FrontController@index');
+  Route::get('/home', 'FrontController@index');
+  Route::get('/course/{sluge}', 'FrontController@index');
+  Route::get('course/{slug}/{id}', 'FrontController@coursesDetails');
+
   // Route::get('instructor-login', 'Auth\InstructorLoginController@UserLogin')->name('instructor-login');
 ## start login student , instructor 
   Route::get('user-login', 'Auth\InstructorLoginController@UserLogin')->name('user-login');
-  Route::post('instructorlogin', 'Auth\InstructorLoginController@LoginUser')->name('instructorlogin');        
-# end
+  Route::post('instructorlogin', 'Auth\InstructorLoginController@LoginUser')->name('instructorlogin');
+  # end
 
-## start signup student , instructor 
+  ## start signup student , instructor 
   Route::get('instructor-signup', 'Auth\InstructorLoginController@instructorSignup')->name('instructor-signup');
   Route::post('instructor-signup-post', 'Auth\InstructorLoginController@instructorSignupPost')->name('instructor-signup-post');
-  
+
   Route::get('student-signup', 'Auth\InstructorLoginController@studentSignup')->name('student-signup');
   Route::post('student-signup-post', 'Auth\InstructorLoginController@registerNewUser')->name('student-signup-post');
-## end
+  ## end
 
-## activation
+  ## activation
   Route::get('/activation/users/{token}', 'Auth\InstructorLoginController@instructorActivation');
-#end
+  #end
 
-## start forgot password 
+  ## start forgot password 
   Route::get('forgot/password', 'Auth\InstructorLoginController@forgotPassword');
   Route::post('forgot/password', 'Auth\InstructorLoginController@submitForgot')->name('forgot.password.post');
-## end 
+  ## end 
 
-## start reset password student , instructor
+  ## start reset password student , instructor
   Route::get('reset-user-password/{token}', 'Auth\InstructorLoginController@resetUserPasswordGet')->name('reset-user-password');
   Route::post('reset-user-password', 'Auth\InstructorLoginController@resetUserPasswordPost')->name('reset-user-password.post');
-## end 
+  ## end 
 
-## start reset password api
+  ## start reset password api
   Route::get('reset-password-api/{token}', 'Auth\InstructorLoginController@resetPasswordGetApi')->name('reset-password-api');
   Route::post('reset-password-api', 'Auth\InstructorLoginController@resetPasswordPostApi')->name('reset-password-post-api');
-## end 
+  ## end 
 
-## signout student , instructor
+  ## signout student , instructor
   Route::post('signoutinstructors', 'Auth\InstructorLoginController@signOutInstructors')->name('signoutinstructors');
-## end
+  ## end
 
   // Route::post('signoutotudent', 'Auth\UserLoginController@signOutStudent')->name('signoutotudent');
   // Route::post('register-new-instructor', 'Auth\InstructorLoginController@registerNewInstructor')->name('register-new-instructor');
-});	
+});

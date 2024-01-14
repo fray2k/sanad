@@ -27,246 +27,15 @@
                                     aria-hidden="true"></i>
                                 <!-- start sub menu -->
                                 <ul class="dropdown-menu" role="menu">
-
+                                    @foreach ($allcategories as $_item)
                                     <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            اللغات 
-                                            <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                        <!-- <ul class="dropdown-menu" role="menu">
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Web Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            All web design</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Graphic Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            Photoshop</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Fashion <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            fashion design</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Interior Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            sketchup</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                        </ul> -->
-                                    </li>
-
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            الفنون والتصميم 
-                                            <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                                aria-hidden="true"></i>
-                                        </a>
-
-                                    </li>
-
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            المهارات الاساسية 
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{url('category/'.$_item->id)}}">
+                                            {{$_item->title}} 
                                             <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
                                                 aria-hidden="true"></i>
                                         </a>
                                     </li>
-
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            إدارة الأعمال 
-                                            <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                                aria-hidden="true"></i>
-                                        </a>
-
-
-                                    </li>
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            إدارة الأعمال 
-                                            <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            إدارة الأعمال 
-                                            <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                             ريادة الأعمال 
-                                            <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                             تنمية مهارات الابناء 
-                                            <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                             الصحة والحياة 
-                                            <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                             إدارة المبيعات والتسويق
-                                             <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
-                                             aria-hidden="true"></i>
-                                        </a>
-
-
-                                        <!-- <ul class="dropdown-menu" role="menu">
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Web Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            All web design</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Graphic Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            Photoshop</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Fashion <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            fashion design</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Interior Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            sketchup</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                        </ul> -->
-
-
-
-
-                                    </li>
-
+                                    @endforeach
                                 </ul>
                             </li>
 
@@ -286,40 +55,26 @@
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </form>
-
                             </div>
-
                             <!-- <a href="#" class="btn header-btn  d-lg-none d-md-block d-block">Subscribe</a> -->
-
-
-
                         </ul>
 
                         <div class="header-search-div">
-
                             <form action="#" class="header-search">
                                 <input placeholder="البحث عن الدورات الأونلاين" class="header-search-input">
                                 <button type="submit" class="header-search-submit">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </form>
-
                         </div>
-
-
                     </div>
                 </div>
                 <div class="col-auto pr-lg-0 d-lg-flex d-md-none d-none">
 
-                    <a href="signup.html" class="btn header-btn2 mr-2">إنشاء حساب جديد</a>
+                    <a href="{{url('student-signup')}}" class="btn header-btn2 mr-2">إنشاء حساب جديد</a>
 
-                    <a href="login.html" class="btn header-btn2 mr-2">تسجيل دخول</a>
-
-
-
+                    <a href="{{url('user-login')}}" class="btn header-btn2 mr-2">تسجيل دخول</a>
                     <!-- <a href="#" class="btn header-btn">Subscribe</a> -->
-
-
                 </div>
             </div>
         </nav>

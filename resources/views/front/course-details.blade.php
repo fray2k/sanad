@@ -24,14 +24,13 @@
                     color: #232323;">
 
                         <div class="image-container2 popup-gallery">
-                            <a class="video" href="https://www.youtube.com/watch?v=WvhQhj4n6b8">
+                            <a class="video" href="{{asset('img/courses/video/'.$course->video) }}">
     
                                 <div class="image-overlay">
                                     <h6><i class="fas fa-play-circle"></i></h6>
                                     <p>Preview this course</p>
                                 </div>
-    
-                                <img src="img/categories/design.jpg">
+                                <img src="{{asset('img/courses/'.$course->image) }}">
                             </a>
                         </div>
                         
@@ -91,7 +90,7 @@
                         </a>
                     </div> -->
                     <div class="course-desc" id="course-desc">
-                        <h5>مهارات الحديث الجماهيري      </h5>
+                        <h5>{{$course->title}}</h5>
                         <!-- <h5>1000 L.E </h5>  -->
                         <!-- <del>1500 L.E</del> -->
                         <!-- <p class="text-danger"><i class="fas fa-stopwatch"></i> 2 days left at this price!
@@ -104,31 +103,31 @@
                             <li class="row">
                                 <div class="col-1"><i class="fab fa-youtube"></i></div>
                                 <div class="col-10">
-                                    <p>المدة الزمنية: 1 ساعة</p>
+                                    <p> سعر الدورة :  {{$course->price}} ر.ق</p>
                                 </div>
                             </li>
                             <li class="row">
                                 <div class="col-1"><i class="far fa-file"></i></div>
                                 <div class="col-10">
-                                    <p>لغة الدورة التدريبية: العربية</p>
+                                    <p>لغة الدورة التدريبية: {{$course->language}}</p>
                                 </div>
                             </li>
                             <li class="row">
                                 <div class="col-1"><i class="fas fa-calendar-alt"></i></div>
                                 <div class="col-10">
-                                    <p>تاريخ بداية الدورة : 2023-12-17</p>
+                                    <p>تاريخ بداية الدورة : {{$course->date}}</p>
                                 </div>
                             </li>
                             <li class="row">
                                 <div class="col-1"><i class="fas fa-infinity"></i></div>
                                 <div class="col-10">
-                                    <p>  وقت الدورة : 9.30 - 11:00 مساءً</p>
+                                    <p>  وقت الدورة :{{$course->time}}</p>
                                 </div>
                             </li>
                             <li class="row">
                                 <div class="col-1"><i class="fas fa-code"></i></div>
                                 <div class="col-10">
-                                    <p>   عدد أيام الدورة : ٣ أيام</p>
+                                    <p>   عدد أيام الدورة : {{$course->duration}}</p>
                                 </div>
                             </li>
                             <!-- <li class="row">
@@ -149,14 +148,8 @@
                                     <p> Certificate of completion</p>
                                 </div>
                             </li> -->
-
-
-
-
-
-
                         </ul>
-                        <a href="#" class="btn header-btn w-100">أشترك الان</a>
+                        <a href="#" class="btn header-btn w-100"> أشترك الان - {{$course->price}} ر.ق </a>
                     </div>
                 </div>
 
@@ -176,10 +169,12 @@
                         <h6>محاور الدورة</h6>
                         <ul class="list-unstyled">
                             <div class="row">
+                            @foreach ($course->course_subtitle as $subtitle)
                                 <li class=" pb-2">
-                                    <a href="signup.html" class="btn mahawir-btn2 mr-2 mr-2"> التطور الذاتي</a>
+                                    <a href="signup.html" class="btn mahawir-btn2 mr-2 mr-2">{{$subtitle->name}}</a>
                                 </li>
-                                <li class=" pb-2">
+                            @endforeach
+                                <!-- <li class=" pb-2">
                                     <a href="signup.html" class="btn mahawir-btn2 mr-2 mr-2"> الوعي الذاتي</a>
                                 </li>
                                 <li class=" pb-2">
@@ -190,7 +185,7 @@
                                 </li>
                                 <li class=" pb-2">
                                     <a href="signup.html" class="btn mahawir-btn2 mr-2 mr-2">التدرب</a>
-                                </li>
+                                </li> -->
                             </div>
                         </ul>
                     </div>
@@ -223,8 +218,8 @@
                         <h6>شرح توضيحي عن الدورة
                         </h6>
 
-                        <p>
-                            لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لصنع نموذج كتاب. لقد صمدت ليس فقط لخمسة قرون، بل قفزت أيضًا إلى التنضيد الإلكتروني، وبقيت دون تغيير بشكل أساسي
+                        <p>{{$course->description}}
+                            <!-- لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لصنع نموذج كتاب. لقد صمدت ليس فقط لخمسة قرون، بل قفزت أيضًا إلى التنضيد الإلكتروني، وبقيت دون تغيير بشكل أساسي -->
                         </p>
                     </div>
 
@@ -233,12 +228,17 @@
                         </h6>
 
                         <ul class="pl-4">
-                            <li>
+                            @foreach ($course->course_requirements as $requirements)
+                                <li class=" pb-2">
+                                   {{$requirements->name}}
+                                </li>
+                            @endforeach
+                            <!-- <li>
                                 لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. 
                             </li>
                             <li>
                                 لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر.
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
 
@@ -284,12 +284,12 @@
                                 <img src="img/instructor.jpg" class="rounded-circle instructor-img">
                             </div>
                             <div class="col-md-10">
-                                <h6 class="font-weight-normal mb-2"><a href="#" class="main-color">د. حمادة علي رجب
+                                <h6 class="font-weight-normal mb-2"><a href="#" class="main-color">{{$course->course_instructor->name}}
                                     </a></h6>
                                 <p class="font-weight-bold  text-dark mb-2">عن المدرب
                                 </p>
-                                <p>
-                                    لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لصنع نموذج كتاب. لقد صمدت ليس فقط لخمسة قرون، بل قفزت أيضًا إلى التنضيد الإلكتروني، وبقيت دون تغيير بشكل أساسي
+                                <p>{{$course->course_instructor->detail}}
+                                    <!-- لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لصنع نموذج كتاب. لقد صمدت ليس فقط لخمسة قرون، بل قفزت أيضًا إلى التنضيد الإلكتروني، وبقيت دون تغيير بشكل أساسي -->
 
 
                                 </p>

@@ -60,6 +60,7 @@ class Instructor extends Authenticatable implements JWTSubject
         	'first_name' . ' as first_name',
         	'last_name' . ' as last_name',
         	'email'. ' as email',
+            'name'. ' as name',
         	'mobile'  . ' as mobile',
         	'photo' . ' as photo',
         	'detail'  . ' as detail',

@@ -92,7 +92,7 @@
 
                     <div class="text-center">
 
-                        <p>Already have an account? <a href="login.html" class="main-color font-weight-bold">Log In</a>
+                        <p>Already have an account? <a href="{{url('user-login')}}" class="main-color font-weight-bold">Log In</a>
                         </p>
 
                     </div>

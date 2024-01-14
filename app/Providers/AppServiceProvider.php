@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\ContactInfo;
+use App\Category;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,5 +27,11 @@ class AppServiceProvider extends ServiceProvider
     {
         $cont = ContactInfo::first();
         view()->share('contact', $cont);
+
+        // $allcategories=[];
+        $allcategories = Category::selection()->with('courses')->has('courses')->get();
+        // dd($allcategories);
+        // $allcategories= Category::where('id',$item->categoryId)->first();
+        view()->share('allcategories', $allcategories);
     }
 }

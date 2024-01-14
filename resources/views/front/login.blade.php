@@ -60,10 +60,8 @@
                     <hr>
 
                     <div class="text-center">
-
-                        <p>Already have an account? <a href="login.html" class="main-color font-weight-bold">Log In</a>
+                        <p>Already have an account? <a href="{{url('student-signup')}}" class="main-color font-weight-bold">SignUp</a>
                         </p>
-
                     </div>
 
 

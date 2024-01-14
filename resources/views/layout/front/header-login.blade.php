@@ -22,100 +22,21 @@
                                     aria-hidden="true"></i>
                                 <!-- start sub menu -->
                                 <ul class="dropdown-menu" role="menu">
-
+                                    @foreach ($allcategories as $_item)
                                     <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            اللغات 
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{url('category/'.$_item->id)}}">
+                                            {{$_item->title}} 
                                             <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
                                                 aria-hidden="true"></i>
                                         </a>
-                                        <!-- <ul class="dropdown-menu" role="menu">
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Web Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            All web design</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Graphic Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            Photoshop</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Fashion <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            fashion design</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Interior Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            sketchup</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                        </ul> -->
                                     </li>
-
-                                    <li class="dropdown simple-dropdown">
+                                    @endforeach
+                                    <!-- <li class="dropdown simple-dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                             الفنون والتصميم 
                                             <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
                                                 aria-hidden="true"></i>
                                         </a>
-
                                     </li>
 
                                     <li class="dropdown simple-dropdown">
@@ -176,91 +97,7 @@
                                              <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
                                              aria-hidden="true"></i>
                                         </a>
-
-
-                                        <!-- <ul class="dropdown-menu" role="menu">
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Web Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            All web design</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Graphic Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            Photoshop</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Fashion <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            fashion design</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                            <li class="dropdown simple-dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    Interior Design <i class="fas fa-angle-right dropdown-toggle"
-                                                        data-toggle="dropdown" aria-hidden="true"></i>
-                                                </a>
-
-
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            sketchup</a>
-                                                    </li>
-                                                </ul>
-
-
-
-
-                                            </li>
-
-                                        </ul> -->
-
-
-
-
-                                    </li>
+                                    </li> -->
 
                                 </ul>
                             </li>
