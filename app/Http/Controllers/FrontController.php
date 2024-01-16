@@ -8,10 +8,52 @@ use App\Slider;
 use App\Course;
 use App\Category;
 use App\Http\Resources\CourseResource;
-
+use App\Rules\ReCaptcha;
 
 class FrontController extends Controller
 {
+    public function contactForm()
+    {
+        return view('front.contact-form');
+    }
+    public function capthcaFormValidate(Request $request)
+    {
+        // $request->validate([
+           
+        //     'captcha' => 'required|captcha'
+        // ]);
+        $this->validate(request(),[
+            'captcha' => 'required|captcha'
+        ],
+        [
+            'captcha.required'=>'captcha مطلوبه',
+            'captcha.captcha'=>'captcha خطأ ',
+        ]
+    );
+
+
+    }
+    public function reloadCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|digits:10|numeric',
+            'subject' => 'required',
+            'message' => 'required',
+            'g-recaptcha-response' => ['required', new ReCaptcha]
+        ]);
+  
+        $input = $request->all();
+  
+        dd($input);
+  
+        return redirect()->back()->with(['success' => 'Contact Form Submit Successfully']);
+    }
     public function index()
     {
         $isLogedin = Auth::guard('instructors')->user();

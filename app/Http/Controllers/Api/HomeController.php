@@ -28,8 +28,14 @@ use App\Http\Resources\SliderResource;
 use App\Http\Resources\VideoResource;
 use App\Http\Resources\InstructorResource;
 use App\Http\Resources\SettingResource;
+use App\Http\Resources\BannerResource;
 
 use App\Instructor;
+use App\Notice;
+use App\Banner;
+use App\Inquiry;
+
+
 class HomeController extends Controller
 {
     use GeneralTrait;
@@ -95,21 +101,46 @@ class HomeController extends Controller
             ->with('user_courses_joined')
             ->with('user_joined')->selection()->latest()->take(20)->get();  
         $sliders = Slider::get(); 
+        $banners = Banner::get(); 
         $introductions = Introduction::selection()->get(); 
         $videos = Video::selection()->get();  
         $data  =[  
             'courses'=>CourseResource::collection($courses),
             'sliders'=>SliderResource::collection($sliders),
             'introductions'=>$introductions,                     
-            'videos'=>VideoResource::collection($videos),                     
+            'videos'=>VideoResource::collection($videos),    
+            'banners'=>BannerResource::collection($banners)                 
         ];
         return $this -> returnDataa(
             'data',$data,''
         );
-        
     }
-
-   
+    
+    public function coursesUser(Request $request)
+    {    
+        $userid = Auth::guard('instructors-api')->user();
+        if(!$userid)
+            return $this->returnError(__('front.You must login first'));
+        $courses_joined = Courses_joined::where('student_id',$userid->id)->latest()->get();  
+        $courses=[];
+        foreach ($courses_joined as $item) {
+            $course = Course::with('course_instructor')
+                         ->with('categories')
+                         ->with('course_requirements')
+                         ->with('course_subtitle')
+                         ->with('user_courses_joined')
+                         ->with('user_joined')
+                         ->selection()
+                         ->where('id',$item->course_id)
+                         ->first();
+        
+            if($course)
+                $courses[]=$course;
+        }
+        return $this -> returnDataa(
+            'data',CourseResource::collection($courses),''
+        );
+    }
     public function coursesDetais(Request $request)
     {   
         $course = Course::with('course_instructor')
@@ -145,13 +176,33 @@ class HomeController extends Controller
             'data',InstructorResource::collection($user),''
         );
     }
-
+    public function notices(Request $request)
+    {
+        $user = Auth::guard('instructors-api')->user();
+        if(!$user)
+            return $this->returnError(__('front.You must login first'));
+        $data = Notice::where('student_id' ,$user->id)->get();
+        return $this -> returnDataa(
+            'data',$data,''
+        );
+    }
+    
     public function settings(Request $request)
     {    
         $settings = Setting::selection()->get();   
         return $this -> returnDataa(
             'data',SettingResource::collection($settings),''
         );
+    }
+    public function inquiries(Request $request)
+    {
+       
+        $add=new Inquiry;
+        $add->name=$request->name;
+        $add->mail=$request->mail;
+        $add->message=$request->message;
+        $add-> save();
+        return $this -> returnSuccessMessage('successfully sent');
     }
 
 }
