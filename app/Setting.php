@@ -10,6 +10,7 @@ class Setting extends Model
     {
         return $query->select(
         	'id',
+            // 'name',
         	'title_' . app()->getLocale() . ' as title',
         	'desc_' . app()->getLocale() . ' as desc',
             'phone',

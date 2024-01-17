@@ -29,11 +29,13 @@ use App\Http\Resources\VideoResource;
 use App\Http\Resources\InstructorResource;
 use App\Http\Resources\SettingResource;
 use App\Http\Resources\BannerResource;
+use App\Http\Resources\SocialResource;
 
 use App\Instructor;
 use App\Notice;
 use App\Banner;
 use App\Inquiry;
+use App\Social;
 
 
 class HomeController extends Controller
@@ -181,7 +183,7 @@ class HomeController extends Controller
         $user = Auth::guard('instructors-api')->user();
         if(!$user)
             return $this->returnError(__('front.You must login first'));
-        $data = Notice::where('student_id' ,$user->id)->get();
+        $data = Notice::selection()->where('student_id' ,$user->id)->get();
         return $this -> returnDataa(
             'data',$data,''
         );
@@ -189,9 +191,14 @@ class HomeController extends Controller
     
     public function settings(Request $request)
     {    
-        $settings = Setting::selection()->get();   
+        $settings = Setting::selection()->first(); 
+        $socials = Social::get();   
+        $data  =[  
+            'settings'=>new SettingResource($settings) ,
+            'socials'=> SocialResource::collection($socials)                   
+        ];
         return $this -> returnDataa(
-            'data',SettingResource::collection($settings),''
+            'data',$data,''
         );
     }
     public function inquiries(Request $request)
