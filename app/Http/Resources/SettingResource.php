@@ -17,7 +17,7 @@ class SettingResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id'=>$this->id,
-            // 'name'=>$this->name,
+            'name'=>$this->name,
             'title'=>$this->title,
             'desc'=>$this->desc,
             'phone'=>$this->phone,

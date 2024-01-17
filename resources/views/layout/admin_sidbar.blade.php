@@ -1,6 +1,6 @@
-    <div class="main-menu-content">
-      <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-        <!-- <li class=" nav-item"><a href="#"><i class="la la-bolt"></i><span class="menu-title" data-i18n="nav.flot_charts.main">الرئيسية</span></a>
+<div class="main-menu-content">
+  <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+    <!-- <li class=" nav-item"><a href="#"><i class="la la-bolt"></i><span class="menu-title" data-i18n="nav.flot_charts.main">الرئيسية</span></a>
           <ul class="menu-content">
             <li  class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
                 <a class="menu-item" href="{{url('admin/dashboard')}}" data-i18n="nav.flot_charts.flot_pie_charts">الرئيسية</a>
@@ -10,62 +10,73 @@
 
 
 
-        <li class="nav-item {{ Request::is('admin/dashboard') ? 'active' : '' }}">
-            <a href="{{url('admin/dashboard')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">الرئيسية</span></a>
-        </li>
-        @can('الرئيسية')
-        @endcan
+    <li class="nav-item {{ Request::is('admin/dashboard') ? 'active' : '' }}">
+      <a href="{{url('admin/dashboard')}}"><i class="la la-envelope"></i><span class="menu-title"
+          data-i18n="">الرئيسية</span></a>
+    </li>
+    @can('الرئيسية')
+    @endcan
 
-        <li class="nav-item {{ Request::is('admin/categories') ? 'active' : '' }}">
-            <a href="{{url('admin/categories')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">نوع العقار</span></a>
-        </li>
+    <li class="nav-item {{ Request::is('admin/categories') ? 'active' : '' }}">
+      <a href="{{url('admin/categories')}}"><i class="la la-envelope"></i><span class="menu-title"
+          data-i18n="">التخصصات</span></a>
+    </li>
+    <li class="nav-item {{ Request::is('admin/courses') ? 'active' : '' }}">
+      <a href="{{url('admin/courses')}}"><i class="la la-envelope"></i><span class="menu-title"
+          data-i18n="">الدورات</span></a>
+    </li>
+    <li class="nav-item {{ Request::is('admin/sliders') ? 'active' : '' }}">
+      <a href="{{url('admin/sliders')}}"><i class="la la-envelope"></i><span class="menu-title"
+          data-i18n="">السلايدر</span></a>
+    </li>
+    <li class="nav-item {{ Request::is('admin/videos') ? 'active' : '' }}">
+      <a href="{{url('admin/videos')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">فيديوهات
+          تعريفيه</span></a>
+    </li>
+    <li class="nav-item {{ Request::is('admin/introductions') ? 'active' : '' }}">
+      <a href="{{url('admin/introductions')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">نص
+          مقدمة عن التطبيق </span></a>
+    </li>
+    <li class="nav-item {{ Request::is('admin/profile') ? 'active' : '' }}">
+      <a href="{{url('admin/profile')}}"><i class="la la-envelope"></i><span class="menu-title"
+          data-i18n="">حسابي</span></a>
+    </li>
+    <li class="nav-item {{ Request::is('admin/settings') ? 'active' : '' }}">
+      <a href="{{url('admin/settings')}}">
+        <i class="la la-envelope"></i><span class="menu-title" data-i18n="">الاعدادات</span>
+      </a>
+    </li>
+    <!-- <li class="nav-item {{ Request::is('admin/roles') ? 'active' : '' }}">
+      <a href="{{url('admin/roles')}}">
+        <i class="la la-envelope"></i><span class="menu-title" data-i18n="">الصلاحيات</span></a>
+    </li>
+
+    <li class="nav-item {{ Request::is('admin/users') ? 'active' : '' }}">
+      <a href="{{url('admin/users')}}">
+        <i class="la la-envelope"></i><span class="menu-title" data-i18n="">المستخدمين</span>
+      </a>
+    </li> -->
+    
 
 
-        <li class="nav-item {{ Request::is('admin/cities') ? 'active' : '' }}">
+    <!-- <li class="nav-item {{ Request::is('admin/cities') ? 'active' : '' }}">
             <a href="{{url('admin/cities')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">المدن</span></a>
         </li>
 
         <li class="nav-item {{ Request::is('admin/states') ? 'active' : '' }}">
             <a href="{{url('admin/states')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">المناطق</span></a>
-        </li>
-        <li class="nav-item {{ Request::is('admin/products') ? 'active' : '' }}">
-            <a href="{{url('admin/products')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">العقار</span></a>
-        </li>
-
-
-
-         <li class="nav-item {{ Request::is('admin/profile') ? 'active' : '' }}">
-                <a href="{{url('admin/profile')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">حسابي</span></a>
-            </li>
-
-            <li class="nav-item {{ Request::is('admin/roles') ? 'active' : '' }}">
-                <a href="{{url('admin/roles')}}">
-                    <i class="la la-envelope"></i><span class="menu-title" data-i18n="">الصلاحيات</span></a>
-            </li>
-
-            <li class="nav-item {{ Request::is('admin/users') ? 'active' : '' }}">
-                <a href="{{url('admin/users')}}">
-                    <i class="la la-envelope"></i><span class="menu-title" data-i18n="">المستخدمين</span>
-                </a>
-            </li>
-            <li class="nav-item {{ Request::is('admin/settings') ? 'active' : '' }}">
-                <a href="{{url('admin/settings')}}">
-                    <i class="la la-envelope"></i><span class="menu-title" data-i18n="">الاعدادات</span>
-                </a>
-            </li>
+        </li> -->
 
 
 
 
 
-        <!--
+    <!--
         <li class=" nav-item"><a href="#"><i class="la la-bolt"></i><span class="menu-title" data-i18n="nav.flot_charts.main">الإعدادات</span></a>
           <ul class="menu-content">
 
 
-            <li class="nav-item {{ Request::is('admin/profile') ? 'active' : '' }}">
-                <a href="{{url('admin/profile')}}"><i class="la la-envelope"></i><span class="menu-title" data-i18n="">حسابي</span></a>
-            </li>
+           
 
             <li class="nav-item {{ Request::is('admin/roles') ? 'active' : '' }}">
                 <a href="{{url('admin/roles')}}">
@@ -100,7 +111,7 @@
 
 
 
-        <!-- <li class=" nav-item"><a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
+    <!-- <li class=" nav-item"><a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
           <ul class="menu-content">
             <li><a class="menu-item" href="dashboard-ecommerce.html" data-i18n="nav.dash.ecommerce">eCommerce</a>
             </li>
@@ -1107,7 +1118,7 @@
             </li>
           </ul>
         </li> -->
-        <!-- <li class=" nav-item"><a href="rickshaw-charts.html"><i class="la la-bullseye"></i><span class="menu-title" data-i18n="nav.rickshaw_charts.main">Rickshaw Charts</span></a>
+    <!-- <li class=" nav-item"><a href="rickshaw-charts.html"><i class="la la-bullseye"></i><span class="menu-title" data-i18n="nav.rickshaw_charts.main">Rickshaw Charts</span></a>
         </li>
         <li class=" nav-item"><a href="#"><i class="la la-map"></i><span class="menu-title" data-i18n="nav.maps.main">Maps</span></a>
           <ul class="menu-content">
@@ -1154,6 +1165,6 @@
             <span class="menu-title" data-i18n="nav.support_documentation.main">Documentation</span>
           </a>
         </li> -->
-      </ul>
-    </div>
-  </div>
+  </ul>
+</div>
+</div>
