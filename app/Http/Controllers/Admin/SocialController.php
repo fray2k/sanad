@@ -27,13 +27,11 @@ class SocialController extends Controller
 
     public function store(Request $request)
     {
-        $file_video = $this->upload($request, 'video', 'img/videos');
-        $file_image = $this->upload($request, 'image', 'img/videos/image');
-        $add = new Video;
-        $add->video    = $file_video;
+        $file_image = $this->upload($request, 'image', 'img/socials');
+        $add = new Social;
         $add->image    = $file_image;
-        $add->title_ar   = $request->title_ar;
-        $add->title_en    = $request->title_en;
+        // $add->title_ar   = $request->title_ar;
+        // $add->title_en    = $request->title_en;
         $add->save();
         return redirect()->back()->with("message",'تمت الإضافة بنجاح'); 
     }
