@@ -167,7 +167,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Mews\Captcha\CaptchaServiceProvider::class,
+        // Mews\Captcha\CaptchaServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -230,7 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        // 'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

@@ -25,6 +25,11 @@
       <a href="{{url('admin/courses')}}"><i class="la la-envelope"></i><span class="menu-title"
           data-i18n="">الدورات</span></a>
     </li>
+    <li class="nav-item {{ Request::is('admin/instructors') ? 'active' : '' }}">
+      <a href="{{url('admin/instructors')}}">
+        <i class="la la-envelope"></i><span class="menu-title" data-i18n=""> المدربين</span>
+      </a>
+    </li>
     <li class="nav-item {{ Request::is('admin/sliders') ? 'active' : '' }}">
       <a href="{{url('admin/sliders')}}"><i class="la la-envelope"></i><span class="menu-title"
           data-i18n="">السلايدر</span></a>
@@ -46,6 +51,13 @@
         <i class="la la-envelope"></i><span class="menu-title" data-i18n="">الاعدادات</span>
       </a>
     </li>
+    
+    <li class="nav-item {{ Request::is('admin/socials') ? 'active' : '' }}">
+      <a href="{{url('admin/socials')}}">
+        <i class="la la-envelope"></i><span class="menu-title" data-i18n="">حسابات السوشيال</span>
+      </a>
+    </li>
+
     <!-- <li class="nav-item {{ Request::is('admin/roles') ? 'active' : '' }}">
       <a href="{{url('admin/roles')}}">
         <i class="la la-envelope"></i><span class="menu-title" data-i18n="">الصلاحيات</span></a>

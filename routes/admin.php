@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin','prefix' => 'admin'
    Route::get('settings','SettingController@settings');
    Route::post('settings/update','SettingController@updateSettings');
 
+   Route::get('instructor/update/status', 'InstructorController@updateStatus')->name('instructor.update.status');
+   Route::resource('instructors','InstructorController');
+
    
     // Route::get('about', 'ProfileController@about'); 
     // Route::get('contact', 'ProfileController@contact');

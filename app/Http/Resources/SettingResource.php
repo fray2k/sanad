@@ -25,6 +25,11 @@ class SettingResource extends JsonResource
             'logo'=>url('/img/settings/' . $this->logo),
             'image'=>url('/img/settings/' . $this->image),
             'favicon'=>url('/img/settings/' . $this->favicon),
+            'twitter'=>$this->twitter,
+            'facebook'=>$this->facebook,
+            'linkedin'=>$this->linkedin,
+            'instagram'=>$this->instagram,
+            'whatsapp'=>$this->whatsapp,
         ];
     }
 }

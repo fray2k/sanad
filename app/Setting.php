@@ -17,7 +17,13 @@ class Setting extends Model
             'mail',
             'logo',
             'image',
-            'favicon'
+            'favicon',
+            'twitter',
+            'facebook',
+            'linkedin',
+            'instagram',
+            'whatsapp',
+
         );
     }
 }
