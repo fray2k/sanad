@@ -192,13 +192,13 @@ class HomeController extends Controller
     public function settings(Request $request)
     {    
         $settings = Setting::selection()->first(); 
-        $socials = Social::get();   
-        $data  =[  
-            'settings'=>new SettingResource($settings) ,
-            'socials'=> SocialResource::collection($socials)                   
-        ];
+        // $socials = Social::get();   
+        // $data  =[  
+        //     'settings'=>new SettingResource($settings) ,
+        //     'socials'=> SocialResource::collection($socials)                   
+        // ];
         return $this -> returnDataa(
-            'data',$data,''
+            'data',new SettingResource($settings),''
         );
     }
     public function inquiries(Request $request)
