@@ -29,7 +29,6 @@ Route::group(['middleware' => ['api','changeLanguage'], 'namespace' => 'Api'], f
     Route::post('forget-password', 'AuthController@forgetPassword');
     Route::post('profile-update', 'AuthController@profileUpdate');
    
-    Route::get('all-courses', 'AuthController@allcourses');
     Route::get('allcourses-lives', 'AuthController@allcoursesLive');
     Route::post('change_password', 'AuthController@changePassword');
     Route::post('forgetpassword', 'AuthController@forgetPassword');
