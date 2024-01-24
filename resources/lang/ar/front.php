@@ -22,4 +22,5 @@ return [
     'enter the new password'=>'أدخل كلمة المرور الجديدة',
     'confirm the password'=>'تأكيد كلمة المرور',
     'save'=>'حفظ',
+    'currency'=>'ر ق',
 ];

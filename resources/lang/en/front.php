@@ -22,5 +22,6 @@ return [
     'enter the new password'=>'Enter the new password',
     'confirm the password'=>'Confirm the password',
     'save'=>'Save',
+    'currency'=>'R Q',
 
 ];
