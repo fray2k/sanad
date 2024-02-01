@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Instructor;
 use App\Http\Controllers\Controller;
 use App\Instructor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Course;
+use App\Video;
 
 class InstructorController extends Controller
 {
@@ -14,9 +17,19 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::guard('instructors')->user();
+        $course=Course::where('user_id',$user->id)->get();        
+        return view('instructor.profile',compact('user','course'));
     }
-
+    public function termsConditions()
+    {
+        return view('instructor.terms');
+    }
+    public function instructorVideo()
+    {
+        $videos=Video::get();
+        return view('instructor.instructor_video',compact('videos'));
+    }
     /**
      * Show the form for creating a new resource.
      *

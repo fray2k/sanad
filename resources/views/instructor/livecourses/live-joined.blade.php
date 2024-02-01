@@ -64,7 +64,7 @@
                         <tr>                        
                             <th class="text-center">#</th>
                             <th class="text-center">اسم الطالب </th>
-                            <th class="text-center">الدولة</th>
+
                             <th class="text-center">التاريخ</th>
                             
                         </tr>
@@ -76,20 +76,13 @@
                             <td class="text-center">{{$key}}</td>
                             <td class="text-center">
                                 <!--<a href="{{url('admin/student-profile/'.$_item->instructor->id) }}">-->
-                                    @if($_item->instructor->full_name != "null")
-                                        {{ $_item->instructor->full_name }}
-                                    @else
-                                        {{ $_item->instructor->name }}
-                                    @endif
+                              {{ $_item->instructor->first_name .' '. $_item->instructor->last_name }}
                                 <!--</a>-->
                             </td>
                           
+                           
                             <td class="text-center">
-                                {{ $_item->country->name }}
-                                
-                            </td>
-                            <td class="text-center">
-                                {{ substr($_item->created_at, 0, 11)   }}
+                                {{ $_item->created_at->format('Y-m-d  H:i' )   }}
                             </td>
                             
 
@@ -117,7 +110,7 @@
                                                                         <div class="col-sm-3">
                                                                         </div>
                                                                         <div class="col-sm-2">
-                                                                            <form method="post" action="{{route('straights.destroy','test')}}">
+                                                                            <form method="post" action="{{route('courses.destroy','test')}}">
                                                                                  @csrf
                                                                                  @method('delete')
                                                                                  <input type="hidden" name="id" id="cat_id">

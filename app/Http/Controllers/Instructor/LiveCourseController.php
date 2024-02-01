@@ -161,63 +161,71 @@ class LiveCourseController extends Controller
     }
 
     public function update(Request $request, Course $course)
-
     {
-        // $this->validate( $request,[          
-        //         'title'=>'required',
-        //         'short_detail'=>'required',
-        //         'detail'=>'required',
-        //         'price'=>'required',
-        //         'date'=>'required',
-        //         'time'=>'required',
-        //         'duration'=>'required',
-        //         'payed'=>'required',
-        //         'image' => 'mimes:jpeg,jpg,png,gif|required|max:10000'
-        //     ],
-        //     [
-        //         'title.required'=>' العنوان مطلوب ',   
-        //         'short_detail.required'=>' يرجى كتابة وصف قصير ',
-        //         'detail.required'=>' يرجي كتابة تفاصيل الكورس',
-        //         'price.required'=>' سعر الكورس مطلوب ',
-        //         'date.required'=>' المستوى مطلوب ',
-        //         'time.required'=>' يرجى كتابة متطلبات الكورس ',
-        //         'duration.required'=>' مدة الكورس مطلوبة ',
-        //         'payed.required'=>' ادخل بعض الكلامات الدلالية ',
-        //         'image.required'=>' يرجي إختيار صورة jpeg,jpg,png,gif ',
-        //     ]
-        // );
-        $userid = Auth::guard('instructors')->user();
+        // dd($request->mahawir_ar_name);
         $date = date('Y-m-d');
-        // dd($course->id);
-        $edit = Course::findOrFail($straight->id);
-        if($file=$request->file('image'))
+        $edit = Course::findOrFail($course->id);
+        if($request->file('image'))
         {
-            $file_extension = $request -> file('image') -> getClientOriginalExtension();
-            $file_name = time().'.'.$file_extension;
-            $file_nameone = $file_name;
-            $path = 'assets_admin/img/livecourses';
-            $request-> file('image') ->move($path,$file_name);
-            $edit->image  = $file_nameone;
+            $file_name = $this->upload($request, 'image', 'img/courses');
+            $edit->image =$file_name;
         }else{
-            $edit->image  = $edit->image;
+            $edit->image = $edit->image;
         }
-        $edit->title    = $request->title;
+        if($request->file('video'))
+        {
+            $video_name = $this->upload($request, 'video', 'img/courses/video');
+            $edit->video=$video_name;
+        }else{
+            $edit->video  = $edit->video;
+        }
+        
+        // dd($request->category_id);
+        $edit->category_id    = $request->category_id;
         $edit->title_ar    = $request->title_ar;
-        $edit->short_detail    = $request->short_detail;
-        $edit->target_group    = $request->target_group;
-        $edit->mahawir    = $request->mahawir;
+        $edit->title_en    = $request->title_en;
+        $edit->description_ar    = $request->description_ar;
+        $edit->description_en    = $request->description_en;
+        
         $edit->date    = $request->date;
         $edit->time    = $request->time;
         $edit->duration    = $request->duration;
-        $edit->slug =Str::slug($request->title, '-', Null);
+        $edit->slug_ar =Str::slug($request->title_ar, '-', Null);
+        $edit->slug_en =Str::slug($request->title_en, '-', Null);
+        $edit->language    = $request->language;
         $edit->payed    = $request->payed;
         if($request->price){
             $edit->price    = $request->price;
-        }else{
-            $edit->price= 0;
         }
+        // $edit->image    = $file_name;
+        // $edit->video    = $video_name;
         $edit->save();
 
+        $length = count($request->mahawir_ar_name);
+        if($length > 0)
+        {
+            for($i=0; $i<$length; $i++)
+            {
+                $add_lecture = new SubTitle;
+                $add_lecture->course_id    = $edit->id;
+                $add_lecture->name_ar    = $request->mahawir_ar_name[$i];
+                $add_lecture->name_en    = $request->mahawir_en_name[$i];
+                $add_lecture->save();
+            }
+        }
+        $length = count($request->requirement_ar_name);
+        if($length > 0)
+        {
+            for($i=0; $i<$length; $i++)
+            {  
+                $add_lecture = new CourseRequirement;
+                $add_lecture->course_id    = $edit->id;
+                $add_lecture->name_ar  = $request->requirement_ar_name[$i];
+                $add_lecture->name_en    = $request->requirement_en_name[$i];
+                $add_lecture->save();
+            }
+             
+        }
 
         
          
@@ -256,11 +264,11 @@ class LiveCourseController extends Controller
     
     public function liveJoined($id)
     {
-        $subscriptions = Courses_joined::where("liveId" , $id)->get();
+        $subscriptions = Courses_joined::where("course_id" , $id)->get();
         foreach ($subscriptions as $_item) {
              $instructor= Instructor::where('id',$_item->student_id)->first();
              $_item->instructor=$instructor;
-             $_item->country= Country::where('id',$instructor->countryId)->first();
+            
         }
         // dd($subscriptions);
         return view('instructor.livecourses.live-joined',compact('subscriptions'));

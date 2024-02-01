@@ -80,6 +80,8 @@ Route::group(['middleware' => ['changeLanguage']], function () {
   Route::post('signoutinstructors', 'Auth\InstructorLoginController@signOutInstructors')->name('signoutinstructors');
   ## end
 
+
+  
   // Route::post('signoutotudent', 'Auth\UserLoginController@signOutStudent')->name('signoutotudent');
   // Route::post('register-new-instructor', 'Auth\InstructorLoginController@registerNewInstructor')->name('register-new-instructor');
 });

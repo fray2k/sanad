@@ -249,7 +249,7 @@ class AuthController extends Controller
         if(!$user)
             return $this->returnError(__('front.You must login first'));
 
-        $edit = Instructor::findOrFail($user->id);
+        $edit = Instructor::findOrFail($user->id); 
         if($file=$request->file('photo'))
         {
             $file_extension = $request -> file('photo')->getClientOriginalExtension();

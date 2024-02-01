@@ -67,7 +67,7 @@
                         <thead>
                             <tr>                                                    
                                 <th>الصورة</th>
-                                <th>العنوان </th>
+                                <th>عنوان الكورس </th>
                                 <th>التاريخ</th>
                                 <th>الحالة</th>
                                 <th class="text-right">العمليات</th>
@@ -78,11 +78,11 @@
                             <tr>
                                 <td>
                                     <a href="profile" class="avatar avatar-sm mr-2">
-                                        <img class="avatar-img" src="{{asset('img/livecourses/'.$_item->image) }}" alt="Speciality">
+                                        <img class="avatar-img" src="{{asset('img/courses/'.$_item->image) }}" alt="Speciality">
                                     </a>
                                 </td>
-                                <td>{{ $_item->title }}</td>                                                
-                                <td>{{ $_item->date   }}</td> 
+                                <td>{{ $_item->title_ar }}</td>                                                
+                                <td>{{ $_item->date}}<br> {{ $_item->time}}</td> 
                                 <td>
                                     @if($_item->status==0)
                                         بانتظار الموافقة

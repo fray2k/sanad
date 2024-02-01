@@ -87,15 +87,17 @@ Route::group(['middleware' => 'checkInstructor','namespace' => 'Instructor','pre
     
     Route::resource('courses','LiveCourseController');    
     Route::get('live-joined/{id}', 'LiveCourseController@liveJoined');
-    
-    Route::get('transfers', 'BillController@transfers')->name('transfers'); 
+    Route::get('profile', 'InstructorController@index');
+    Route::get('terms', 'InstructorController@termsConditions')->name('terms'); 
+    Route::get('instructor-video', 'InstructorController@instructorVideo');	
+
+
 
     Route::get('report/sales','ReportController@sales');
     Route::get('report/transfers','ReportController@transfers');
     Route::get('report/statistics','ReportController@statistics');
    	Route::get('getbook/{id}', 'BookController@getbook');
 
-    Route::get('profile', 'ProfileController@index');
     Route::get('print-certificates', 'ProfileController@printCertificates');
 
     Route::get('bankdetails', 'ProfileController@bankDetails');
@@ -115,9 +117,8 @@ Route::group(['middleware' => 'checkInstructor','namespace' => 'Instructor','pre
     
     Route::post('user/changepassword', 'ProfileController@changePassword')->name('user.changepassword');
     
-    Route::get('instructional-video', 'ProfileController@instructionalVideo');	
 	Route::get('agreements', 'ProfileController@agreements')->name('agreements');	
-    Route::get('terms/conditions', 'ProfileController@termsConditions')->name('terms-conditions');       	
+          	
 });	
 
 

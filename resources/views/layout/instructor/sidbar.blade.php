@@ -30,43 +30,43 @@
                 <i class="la la-envelope"></i><span class="menu-title" data-i18n="">معلومات Western Union</span></a>
         </li> -->
         
-        <li class="nav-item {{ Request::is('instructor/straights') ? 'active' : '' }}">
-            <a href="{{ url('instructor/straights') }}">
+        <li class="nav-item {{ Request::is('instructor/courses') ? 'active' : '' }}">
+            <a href="{{ url('instructor/courses') }}">
                 <i class="la la-envelope"></i><span class="menu-title" data-i18n=""> الدورات الاونلاين</span></a>
         </li>
-        
-        <li class="nav-item {{ Request::is('instructor/bills') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('instructor/terms') ? 'active' : '' }}">
+            <a href="{{url('instructor/terms')}}">
+                <i class="la la-envelope"></i>
+                <span class="menu-title" data-i18n="">إرشادات المدرب</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Request::is('instructor/instructor-video') ? 'active' : '' }}">
+            <a href="{{url('instructor/instructor-video')}}">
+                <i class="la la-envelope"></i>
+                <span class="menu-title" data-i18n=""> فيديوهات إرشادية</span>
+            </a>
+        </li>
+        <!-- <li class="nav-item {{ Request::is('instructor/bills') ? 'active' : '' }}">
             <a href="{{ url('instructor/bills') }}">
                 <i class="la la-envelope"></i><span class="menu-title" data-i18n=""> ارباحي</span></a>
         </li>
         <li class="nav-item {{ Request::is('instructor/transfers') ? 'active' : '' }}">
             <a href="{{ url('instructor/transfers') }}">
                 <i class="la la-envelope"></i><span class="menu-title" data-i18n=""> تحويلات البنك</span></a>
-        </li>
+        </li> -->
         
 
         
         
         
        
-        <li class="nav-item {{ Request::is('instructor/agreements') ? 'active' : '' }}">
+        <!-- <li class="nav-item {{ Request::is('instructor/agreements') ? 'active' : '' }}">
             <a href="{{url('instructor/agreements')}}">
                 <i class="la la-envelope"></i>
                 <span class="menu-title" data-i18n="">اتفاقية المدرب</span>
             </a>
-        </li>
-        <li class="nav-item {{ Request::is('instructor/terms/conditions') ? 'active' : '' }}">
-            <a href="{{url('instructor/terms/conditions')}}">
-                <i class="la la-envelope"></i>
-                <span class="menu-title" data-i18n="">إرشادات المدرب</span>
-            </a>
-        </li>
-        <li class="nav-item {{ Request::is('instructor/instructional-video') ? 'active' : '' }}">
-            <a href="{{url('instructor/instructional-video')}}">
-                <i class="la la-envelope"></i>
-                <span class="menu-title" data-i18n=""> فيديوهات إرشادية</span>
-            </a>
-        </li>
+        </li> -->
+       
 
         
 

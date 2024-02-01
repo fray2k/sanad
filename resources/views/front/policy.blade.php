@@ -6,48 +6,25 @@
             <div class="row">
 
                 <div class="col-md-12">
-                    <h5 class="text-dark font-weight-600">Privacy Policy</h5>
+                    <h5 class="text-dark font-weight-600">سياسة الخصوصية</h5>
                     <hr>
 
                     <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
+                       
+سياسة الخصوصية هذه توفر طريقة جمع البيانات الخاصة بك بالطريقة المستخدمة من قبل شركة سند للتدريب، عن طريق الدخول إلى الخدمات التي تقدمها شركة سند للتدريب إنك توافق على جمع واستخدام البيانات الخاصة بك عن طريق شركة سند للتدريب، وبعض مقدمي الخدمة طرف ثالث بالطريقة المنصوص عليها في سياسة الخصوصية هذه. إذا كنت لا توافق على سياسة الخصوصية هذه، يرجى عدم استخدام الموقع الالكتروني لشركة سند المتقدم للتدريب. من خلال قبول سياسة الخصوصية أثناء التسجيل، يجب أن توافق صراحة على استخدامنا والكشف عن المعلومات الشخصية الخاصة بك وفقاً لسياسة الخصوصية هذه. يتم تضمينها في سياسة الخصوصية هذه و تخضع لشروط اتفاقية المستخدم.
                     </p>
 
-                    <h6>Why do we use it?</h6>
+                    <h6>لماذا نستخدم سند</h6>
 
                     <p>
-                        It is a long established fact that a reader will be distracted by the readable content of a page
-                        when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                        distribution of letters, as opposed to using 'Content here, content here', making it look like
-                        readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as
-                        their default model text, and a search for 'lorem ipsum' will uncover many web sites still in
-                        their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on
-                        purpose (injected humour and the like).
+                        
+تقدم شركة سند المتقدم للتدريب خدمة تقديم الدورات المباشرة من خلال موقعها الالكتروني والتطبيق. نريدك أن تشعر بالراحة عند استخدام موقعنا و تشعر بالأمان عند مشاركتك المعلومات الخاصة بك معنا، و بالتالي نحن فخورون للغاية بالتزامنا لحماية خصوصيتك. يرجى مواصلة قرأة السياسة التالية لفهم كيف يتم التعامل مع المعلومات الشخصية الخاصة بك كما تمكنك من الإستفادة الكاملة من موقعنا.
                     </p>
 
-                    <h6>Where does it come from?</h6>
+                    <h6></h6>
 
                     <p>
-                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a
-                        Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin
-                        words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in
-                        classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32
-                        and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
-                        written in 45 BC. This book is a treatise on the theory of ethics, very popular during the
-                        Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in
-                        section 1.10.32.
-
-                        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
-                        Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced
-                        in their exact original form, accompanied by English versions from the 1914 translation by H.
-                        Rackham.
+                    نحن نوظف شركات أخرى و أفراد لأداء المهام نيابة عنا. ومن الأمثلة على ذلك مباشرة الطلبات، إرسال البريد الإلكتروني، تحليل البيانات، تقديم المساعدة والتسويق، تقديم نتائج البحث، تجهيز مدفوعات
 
 
                     </p>
