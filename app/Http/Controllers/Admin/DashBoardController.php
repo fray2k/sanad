@@ -5,43 +5,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
-use App\Product;
-use App\Visit;
+use App\Instructor;
+use App\Course;
 class DashBoardController extends Controller
 {
-       
-
     public function __construct()
     {
         $this->middleware('auth');
     }
    
     public function index()
-    {
+    {       
         
-        // $courses=Course::where('status',1)->get();
-        // $courses_count=count($courses);
-        $product_count=Product::count();
-        $user_count=User::count();
-        $visit_sum=Visit::sum('viewer');
-        // dd($visit_sum);
-        // $student_not_active_count=Instructor::where('type','student')->where('status',0)->count();
-        
-        // $instructor_count=Instructor::where('type','instructor')->count();
-        // $instructor_count_active=Instructor::where('type','instructor')->where('suspended',1)->where('blocked',1)->count();
-        
-        // $instructor_publish_course=Instructor::where('type','instructor')->get();
-        // $instructor_count_publish_course=[];
-        // foreach ($instructor_publish_course as $item) {   
-        //     $course_sum= Course::where('userId',$item->id)->first();
-        //     if($course_sum){
-        //         $instructor_count_publish_course[]=$course_sum;
-        //     }
-        // }
-        
-        // $balance=Transaction::orderBy('id', 'DESC')->first();
-    //   dd($product_count);
-        return view('admin.index_admin',compact('product_count','user_count','visit_sum'));
+        $instructor_count=Instructor::where('type','instructor')->count();
+        $student_count=Instructor::where('type','student')->count();
+        $course_count=Course::count();
+        return view('admin.index_admin',compact('instructor_count','student_count','course_count'));
     }
 
     // public function create()

@@ -108,9 +108,17 @@ class SettingController extends Controller
         }else{
             $edit->favicon  = $edit->favicon;
         }
-        $edit->title = $request->title;
-        $edit->phone = $request->phone;
-        $edit->desc  = $request->desc;
+        $edit->title_ar = $request->title_ar;
+        $edit->title_en = $request->title_en;
+        $edit->desc_ar  = $request->desc_ar;
+        $edit->desc_en  = $request->desc_en;
+        $edit->mail  = $request->mail;
+        $edit->phone  = $request->phone;
+        $edit->privacy_ar  = $request->privacy_ar;
+        $edit->privacy_en  = $request->privacy_en;
+        $edit->terms_ar  = $request->terms_ar;
+        $edit->terms_en  = $request->terms_en;
+
         $edit->save();
         return back()->with("success", 'تم التحديث ');
     }

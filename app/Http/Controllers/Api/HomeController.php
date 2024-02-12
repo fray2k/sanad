@@ -171,6 +171,19 @@ class HomeController extends Controller
             'data',new CourseResource($course),''
         );
     }
+    public function joinedCourses(Request $request)
+    {
+        $userid = Auth::guard('instructors-api')->user();
+        if(!$userid)
+            return $this->returnError(__('front.You must login first'));
+        $add=new Courses_joined;
+        $add->student_id=$userid->id;
+        $add->instructor_id=$request->instructor_id;
+        $add->course_id=$request->course_id;
+        $add->status=1;
+        $add-> save();
+        return $this -> returnSuccessMessage('successfully sent');
+    }
     public function getInstructor(Request $request)
     {
        $user = Instructor::where('type' ,'instructor')->get();

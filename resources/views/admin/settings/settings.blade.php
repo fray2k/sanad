@@ -121,68 +121,54 @@
 								                name="le_form"  enctype="multipart/form-data">
 								                                @csrf
 											<input type="hidden" name="id" value="{{Auth::user()->id}}">
-											
-											
-											
-							
-	<!--<form id="form1" runat="server">-->
- <!--       <input type="file" accept="image/*" capture>-->
- <!--       <input type="file" accept="image/*" capture="camera">-->
- <!--       <input type="file" accept="video/*" capture="environment"  id="videoFile" />-->
- <!--       <img id="blah" src="#" alt="your image" />-->
- <!--   </form>-->
-
-    
-    <!--<script type="text/javascript">-->
-    <!--    function readURL(input) {-->
-    <!--        if (input.files && input.files[0]) {-->
-    <!--            var reader = new FileReader();-->
-
-    <!--            reader.onload = function (e) {-->
-    <!--                $('#blah').attr('src', e.target.result);-->
-    <!--            }-->
-
-    <!--            reader.readAsDataURL(input.files[0]);-->
-    <!--        }-->
-    <!--    }-->
-
-    <!--    $("#imgInp").change(function(){-->
-    <!--        readURL(this);-->
-    <!--    });-->
-    <!--</script>-->
-
-											
-											
-											
-											
-											
-											
-											<div class="form-group">
+										<div class="row form-row">	
+											<div class="form-group col-md-6 col-sm-6">
 												<label>العنوان العربي</label>
-												<input type="text" name="title" class="form-control" value="{{$settings->title}}">
+												<input type="text" name="title_ar" class="form-control" value="{{$settings->title_ar}}">
 											</div>
-											<div class="form-group">
+											<div class="form-group col-md-6 col-sm-6">
+												<label>العنوان انجليزي</label>
+												<input type="text" name="title_en" class="form-control" value="{{$settings->title_en}}">
+											</div>
+											<div class="form-group col-md-6 col-sm-6">
 												<label>رقم الهاتف</label>
 												<input type="text" name="phone" class="form-control" value="{{$settings->phone}}">
 											</div>
-											
-											<div class="form-group">
-												<label>الوصف </label>
-												<!-- <input type="text" name="privacy" class="form-control" value="{{$settings->privacy}}"> -->
-												<textarea name="desc" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->desc}}</textarea>
+											<div class="form-group col-md-6 col-sm-6">
+												<label> email</label>
+												<input type="text" name="mail" class="form-control" value="{{$settings->mail}}">
 											</div>
 											
-											<!-- <div class="form-group">
+											<div class="form-group col-md-6 col-sm-6">
+												<label>الوصف </label>
+												<textarea name="desc_ar" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->desc_ar}}</textarea>
+											</div>
+											<div class="form-group col-md-6 col-sm-6">
 												<label>الوصف انجليزي</label>
-												<input type="text" name="description_en" class="form-control" value="{{$settings->description_en}}">
-											</div>	 -->										
-																							
+												<textarea name="desc_en" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->desc_en}}</textarea>
+											</div>											
+											<div class="form-group col-md-6 col-sm-6">
+												<label>سياسة الخصوصه عربي</label>
+												<textarea name="privacy_ar" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->privacy_ar}}</textarea>
+											</div>
+											<div class="form-group col-md-6 col-sm-6">
+												<label> سياسة الخصوصية انجليزي</label>
+												<textarea name="privacy_en" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->privacy_en}}</textarea>
+											</div>
+											<div class="form-group col-md-6 col-sm-6">
+												<label>سياسة الخصوصه عربي</label>
+												<textarea name="terms_ar" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->terms_ar}}</textarea>
+											</div>
+											<div class="form-group col-md-6 col-sm-6">
+												<label> سياسة الخصوصية انجليزي</label>
+												<textarea name="terms_en" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->terms_en}}</textarea>
+											</div>												
 											<div class="form-group row">
 												<div class="col-md-2">
 													<img class="avatar-img" src="{{asset('img/settings/'.$settings->image) }}" alt="Speciality" width="120" height="100">
 												</div>
 												<div class="col-md-10">
-													<label>صورة التى سوف يتم عرضها في صفحة من حنح</label>
+													<label>صورة التى سوف يتم عرضها في صفحة من نحن </label>
 													<input type="file" name="image" class="form-control">						
 													<!-- <input type="hidden" name="url" value="{{$settings->image}}">	 -->
 												</div>												
@@ -208,6 +194,7 @@
 												</div>	
 												
 											</div>
+										</div>
 											<button type="submit" class="btn btn-primary btn-block">حفظ التغيير </button>
 											
 										</form>
