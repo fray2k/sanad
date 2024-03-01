@@ -4,8 +4,8 @@
             <div class="container nav-header-container">
                 <!-- start logo -->
                 <div class="col-auto pl-lg-0">
-                    <a href="index.html" title="" class="logo">
-                        <h1>Online Courses t</h1>
+                    <a href="{{url('/')}}" title="" class="logo">
+                        <h1>Sanad</h1>
                     </a>
                 </div>
                 <!-- end logo -->
@@ -22,15 +22,19 @@
 
 
 
-                            <li class="dropdown simple-dropdown"><a href="#">التخصصات <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                            <li class="dropdown simple-dropdown"><a href="#">{{__('front.Categories')}} <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
                                 <i class="fas fa-angle-down dropdown-toggle" data-toggle="dropdown"
                                     aria-hidden="true"></i>
                                 <!-- start sub menu -->
                                 <ul class="dropdown-menu" role="menu">
                                     @foreach ($allcategories as $_item)
                                     <li class="dropdown simple-dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{url('category/'.$_item->id)}}">
-                                            {{$_item->title}} 
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{url('category/'.$_item->slug)}}">
+                                          @if($langg=='ar')
+                                            {{$_item->title_ar}}
+                                          @else
+                                            {{$_item->title_en}}
+                                          @endif
                                             <i class="fas fa-angle-left dropdown-toggle" data-toggle="dropdown"
                                                 aria-hidden="true"></i>
                                         </a>
@@ -71,9 +75,9 @@
                 </div>
                 <div class="col-auto pr-lg-0 d-lg-flex d-md-none d-none">
 
-                    <a href="{{url('student-signup')}}" class="btn header-btn2 mr-2">إنشاء حساب جديد</a>
+                    <a href="{{url('student-signup')}}" class="btn header-btn2 mr-2">{{__('front.SignUp')}}</a>
 
-                    <a href="{{url('user-login')}}" class="btn header-btn2 mr-2">تسجيل دخول</a>
+                    <a href="{{url('user-login')}}" class="btn header-btn2 mr-2">{{__('front.Log In')}}</a>
                     <!-- <a href="#" class="btn header-btn">Subscribe</a> -->
                 </div>
             </div>

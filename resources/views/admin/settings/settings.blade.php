@@ -1,5 +1,5 @@
 @extends('layout.admin_main')
-@section('content')	
+@section('content')
 
 
 
@@ -11,10 +11,10 @@
           <div class="row">
             <div class="col-12">
               <div class="card">
-             
+
                 <div class="card-content collapse show">
                   <div class="card-body">
-                    
+
                     <div class="form-group">
                       <textarea name="ckeditor" id="ckeditor" cols="30" rows="15" class="ckeditor">
 								<h1><img alt="Saturn V carrying Apollo 11" class="right" src="../../../app-assets/images/elements/01.png" height="250" /> Apollo 11</h1>
@@ -81,14 +81,14 @@
 			              <ol class="breadcrumb">
 			                <li class="breadcrumb-item"><a href="index.html">الرئيسية</a>
 			                </li>
-			                
+
 			                <li class="breadcrumb-item active">الاعدادات
 			                </li>
-			              </ol> 
+			              </ol>
 			            </div>
 			          </div>
 			        </div>
-			        
+
 			        @if (session('success'))
 			            <div class="alert alert-success">
 			                {{ session('success') }}
@@ -113,15 +113,15 @@
           <div class="row">
             <div class="col-12">
               <div class="card">
-               
+
                 <div class="card-content collapse show">
                   <div class="card-body card-dashboard">
                    	<div class="card-body">
-										<form action="{{url('admin/settings/update')}}" method="POST" 
+										<form action="{{url('admin/settings/update')}}" method="POST"
 								                name="le_form"  enctype="multipart/form-data">
 								                                @csrf
 											<input type="hidden" name="id" value="{{Auth::user()->id}}">
-										<div class="row form-row">	
+										<div class="row form-row">
 											<div class="form-group col-md-6 col-sm-6">
 												<label>العنوان العربي</label>
 												<input type="text" name="title_ar" class="form-control" value="{{$settings->title_ar}}">
@@ -138,7 +138,7 @@
 												<label> email</label>
 												<input type="text" name="mail" class="form-control" value="{{$settings->mail}}">
 											</div>
-											
+
 											<div class="form-group col-md-6 col-sm-6">
 												<label>الوصف </label>
 												<textarea name="desc_ar" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->desc_ar}}</textarea>
@@ -146,7 +146,7 @@
 											<div class="form-group col-md-6 col-sm-6">
 												<label>الوصف انجليزي</label>
 												<textarea name="desc_en" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->desc_en}}</textarea>
-											</div>											
+											</div>
 											<div class="form-group col-md-6 col-sm-6">
 												<label>سياسة الخصوصه عربي</label>
 												<textarea name="privacy_ar" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->privacy_ar}}</textarea>
@@ -162,16 +162,16 @@
 											<div class="form-group col-md-6 col-sm-6">
 												<label> سياسة الخصوصية انجليزي</label>
 												<textarea name="terms_en" id="ckeditor" cols="30" rows="15"  class="form-control ckeditor">{{$settings->terms_en}}</textarea>
-											</div>												
+											</div>
 											<div class="form-group row">
 												<div class="col-md-2">
 													<img class="avatar-img" src="{{asset('img/settings/'.$settings->image) }}" alt="Speciality" width="120" height="100">
 												</div>
 												<div class="col-md-10">
 													<label>صورة التى سوف يتم عرضها في صفحة من نحن </label>
-													<input type="file" name="image" class="form-control">						
+													<input type="file" name="image" class="form-control">
 													<!-- <input type="hidden" name="url" value="{{$settings->image}}">	 -->
-												</div>												
+												</div>
 											</div>
 											<div class="form-group row">
 												<div class="col-md-2">
@@ -179,24 +179,24 @@
 												</div>
 												<div class="col-md-10">
 													<label>الشعار</label>
-													<input type="file" name="logo" class="form-control">						
+													<input type="file" name="logo" class="form-control">
 													<!-- <input type="hidden" name="url" value="{{$settings->logo}}">	 -->
-												</div>												
+												</div>
 											</div>
 											<div class="form-group row">
 												<div class="col-md-2">
 													<img class="avatar-img" src="{{asset('img/settings/'.$settings->favicon) }}" alt="Speciality" width="120" height="100">
-												</div>	
+												</div>
 												<div class="col-md-10">
 													<label>Favicon</label>
-													<input type="file" name="favicon" class="form-control">	
+													<input type="file" name="favicon" class="form-control">
 													<!-- <input type="hidden" name="url2" value="{{$settings->favicon}}">	 -->
-												</div>	
-												
+												</div>
+
 											</div>
 										</div>
 											<button type="submit" class="btn btn-primary btn-block">حفظ التغيير </button>
-											
+
 										</form>
 									</div>
                   </div>
@@ -208,5 +208,3 @@
 
 
 @endsection
-
-

@@ -1,3 +1,12 @@
+@php
+  if(session()->get('locale')){
+    $langg=session()->get('locale');
+    App::setLocale($langg);
+  }else{
+    $langg=app()->getLocale();
+    App::setLocale($langg);
+  }
+@endphp
 <!-- title -->
 <title>Online Courses</title>
 
@@ -25,8 +34,14 @@
 <link rel="stylesheet" href="{{asset('front/css/bootsnav.css')}}">
 
 <!-- style -->
-<!-- <link rel="stylesheet" href="css/style.css" /> -->
-<link rel="stylesheet" href="{{asset('front/css/style_rtl.css')}}" />
+@if($langg=='ar')
+  <link rel="stylesheet" href="{{asset('front/css/style_rtl.css')}}" />
+@else
+  <link rel="stylesheet" href="{{asset('front/css/style.css')}}" />
+@endif
+
+
+
 <!-- responsive css -->
 <link rel="stylesheet" href="{{asset('front/css/responsive.css')}}" />
 

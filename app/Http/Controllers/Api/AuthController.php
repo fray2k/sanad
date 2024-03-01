@@ -52,9 +52,9 @@ class AuthController extends Controller
                   $UserData->token=$token;
                   $UserData->device_token=$request->device_token;
                   $UserData->save();
-                 
+
                   $UserData->photo=$this->getFile('/img/profiles/students/',$UserData->photo,'/img/profiles/');
-                 
+
                   return $this -> returnDataa('data',$UserData,__('front.logged in'));
                 // }
             }else {
@@ -85,6 +85,7 @@ class AuthController extends Controller
         }else{
             $token = Str::random(60);
             $add = Instructor::create([
+                'name' =>  $request->first_name .' '. $request->last_name;
                 'first_name'  => $request->first_name,
                 'last_name'  => $request->last_name,
                 'mobile'  => $request->mobile,
@@ -168,7 +169,7 @@ class AuthController extends Controller
 
 
                     return $this -> returnSuccessMessage(__('front.Please visit your email'));
-                
+
             } catch (\Swift_TransportException $ex) {
                 // $arr = array("status" => 400, "message" => $ex->getMessage(), "data" => []);
                 return $this -> returnError('400', $ex->getMessage());
@@ -249,7 +250,7 @@ class AuthController extends Controller
         if(!$user)
             return $this->returnError(__('front.You must login first'));
 
-        $edit = Instructor::findOrFail($user->id); 
+        $edit = Instructor::findOrFail($user->id);
         if($file=$request->file('photo'))
         {
             $file_extension = $request -> file('photo')->getClientOriginalExtension();
@@ -261,7 +262,11 @@ class AuthController extends Controller
         }else{
             $edit->photo  = $edit->photo;
         }
-
+        if(isset($request->first_name) && isset($request->last_name)){
+            $edit->name  = $request->first_name .' '. $request->last_name;
+        }else{
+            $edit->name  = $edit->name;
+        }
         if(isset($request->first_name)){
             $edit->first_name  = $request->first_name;
         }else{
@@ -282,7 +287,7 @@ class AuthController extends Controller
         }else{
             $edit->detail  = $edit->detail;
         }
-       
+
 
 
         $edit-> save();
@@ -321,6 +326,6 @@ class AuthController extends Controller
          // return $this -> returnDataa('data',$user,'');
      }
 
-    
-    
+
+
 }

@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('contact', $cont);
 
         // $allcategories=[];
-        $allcategories = Category::selection()->with('courses')->has('courses')->get();
+        $allcategories = Category::with('courses')->has('courses')->get();
         // dd($allcategories);
         // $allcategories= Category::where('id',$item->categoryId)->first();
         view()->share('allcategories', $allcategories);

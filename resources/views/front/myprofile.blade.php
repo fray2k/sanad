@@ -1,11 +1,11 @@
 @extends('layout.front.main')
-@section('content')	
+@section('content')
     <!-- start banner  -->
     <section class="parallax banner">
         <div class="container">
             <div class="row justify-content-center">
 
-                <h3 class="text-white font-weight-600">My Profile</h3>
+                <h3 class="text-white font-weight-600">{{__('front.My Profile')}}</h3>
 
             </div>
         </div>
@@ -19,63 +19,41 @@
             <div class="row">
 
                 <aside class="col-12 col-lg-3 float-left">
+                     @include('layout.front.sidebar')
 
-
-
-                    <div class="bg-light p-3 pt-4 mb-3 bg-white text-center">
-
-                        <img src="img/instructor.jpg" class="img-thumbnail profile-img-edit">
-
-                        <div class="image-upload">
-                            <label for="file-input">
-                                <i class="fas fa-pen"></i>
-                            </label>
-
-                            <input id="file-input" type="file" />
-                        </div>
-
-                        <p class="text-bold-500 text-dark text-extra-large mb-3">User Name</p>
-
-                        <p class="text-medium2">user@gmail.com</p>
-
-                    </div>
-
-                    <div class="margin-45px-bottom sm-margin-25px-bottom bg-white p-4">
-                        
-                        <a class="profile-links" href="mycourses.html">
-                            <i class="fas fa-video pr-2"></i> My Courses
-                        </a>
-
-                        <a class="profile-links" href="mywishlist.html">
-                            <i class="fas fa-heart pr-2"></i> My Wishlist
-                        </a>
-
-                        <a class="profile-links" href="myprofile.html">
-                            <i class="fas fa-user pr-2"></i> My Profile
-                        </a>
-
-                        <a class="profile-links" href="become-instructor.html">
-                            <i class="fas fa-chalkboard-teacher pr-2"></i> Become an Instructor
-                        </a>
-
-                        <a class="profile-links" href="bank-details.html">
-                            <i class="fas fa-money-check pr-2"></i> Bank Details
-                        </a>
-                    </div>
 
 
 
                 </aside>
 
-                <main class="col-12 col-lg-9 left-sidebar bg-white mb-5">
+                <main class="bg-light col-12 col-lg-9 left-sidebar bg-white mb-5">
 
                     <div class="form-section form-section-edit">
 
-                        <h6>Personal Information
+                        <h6>{{__('front.Personal Information')}}
                         </h6>
                         <hr>
-
-                        <form>
+                        @if (session('message'))
+                                                    <div class="alert alert-success">
+                                                        {{ session('message') }}
+                                                    </div>
+                                                @endif
+                                                @if (count($errors) > 0)
+                                                    <div class="alert alert-danger">
+                                                        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <strong>خطا</strong>
+                                                        <ul>
+                                                            @foreach ($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                        <form action="{{route('updateprofile')}}" method="POST"
+                                    name="le_form"  enctype="multipart/form-data">
+                                    @csrf
 
 
                             <div class="row mb-3">
@@ -83,14 +61,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" value="User">
+                                        <input type="text" name="first_name" class="form-control" value="{{$user->first_name}}">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" value="Name">
+                                        <input type="text" name="last_name" class="form-control" value="{{$user->last_name}}">
                                     </div>
                                 </div>
 
@@ -101,82 +79,32 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="text" class="form-control" value="user@gmail.com">
+                                        <input type="text" class="form-control" value="{{$user->email}}" disabled>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Mobile</label>
-                                        <input type="text" class="form-control" value="00000000">
+                                        <input type="text" name="mobile" class="form-control" value="{{$user->mobile}}">
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="row mb-3">
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea rows="5" class="form-control">text text text
+                                        <label> Bio</label>
+                                        <textarea name="detail" rows="5" class="form-control">{{$user->detail}}
                                             </textarea>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <div class="row mb-3">
 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Country:</label>
-                                        <select class="form-control" name="" id="">
-                                            <option value="">Cairo</option>
-                                            <option value="">United States</option>
-                                        </select>
-                                    </div>
-                                </div>
 
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>State:</label>
-                                        <select  class="form-control" name="" id="">
-                                            <option value="">Cairo</option>
-                                            <option value="">United States</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>City:</label>
-                                        <select  class="form-control" name="" id="">
-                                            <option value="">Cairo</option>
-                                            <option value="">United States</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                               
-
-                            </div>
-
-                            <div class="row mb-3">
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Author Bio</label>
-                                        <textarea rows="5" class="form-control">text text text
-                                            </textarea>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row mb-3">
+                            <!-- <div class="row mb-3">
 
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -203,12 +131,12 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> -->
 
                             <div class="row mb-3 justify-content-end mr-2">
 
                                 <button type="submit" class="btn header-btn text-medium font-weight-600">
-                                Update Profile    
+                                {{__('front.save change')}}
                                 </button>
                             </div>
 

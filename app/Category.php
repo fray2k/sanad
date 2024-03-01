@@ -8,7 +8,7 @@ class Category extends Model
 {
 
     public function courses(){
-        return $this->hasMany(Course::class,'category_id','id')->selection();
+        return $this->hasMany(Course::class,'category_id','id');
     }
     public function scopeSelection($query)
     {

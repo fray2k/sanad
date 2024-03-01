@@ -46,10 +46,10 @@ class SliderController extends Controller
 
         $add->image    = $file_name;
         $add->save();
-        return redirect()->back()->with("message",'تمت الإضافة بنجاح'); 
+        return redirect()->back()->with("message",'تمت الإضافة بنجاح');
     }
 
-    
+
     public function edit(Slider $article)
     {
         return view('admin.sliders.edit',compact('article'));
@@ -57,11 +57,11 @@ class SliderController extends Controller
 
     public function update(Request $request)
     {
-         // $userId = 1;
          $edit = Slider::findOrFail($request->id);
-         $edit->title    = ['ar' => $request->title_ar, 'en' => $request->title_en];;
-         $edit->description    = ['ar' => $request->description_ar, 'en' => $request->description_en];
-        
+         $edit->title_ar    = $request->title_ar;
+         $edit->title_en    = $request->title_en;
+         $edit->description_ar    = $request->description_ar;
+         $edit->description_en    =  $request->description_en;
         // dd($request -> file('image'));
         // if($file=$request->file('image'))
         // {
@@ -73,58 +73,22 @@ class SliderController extends Controller
 
         //     $edit->image  =$file_nameone;
         // }else{
-        //     $edit->image  = $edit->image; 
+        //     $edit->image  = $edit->image;
         // }
 
          if($file=$request->file('image'))
          {
-            $file_extension = $request -> file('image') -> getClientOriginalExtension();
-            $file_name = time().'.'.$file_extension;
-            $file_nameone = $file_name;
-            $path = 'assets_admin/img/sliders';
-            $request-> file('image') ->move($path,$file_name);
-            $edit->image  = $file_nameone;
+            $file_name = $this->upload($request, 'image', 'img/sliders');
+
+            $edit->image  = $file_name;
          }else{
-            $edit->image  = $edit->image; 
+            $edit->image  = $edit->image;
          }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
          $edit->save();
-
-
         // $category = Speciality::findOrFail($request->id);
-
         // $category->update($request->all());
-       
-        return redirect()->route('sliders.index')->with("message", 'تم التعديل بنجاح'); 
+
+        return redirect()->route('sliders.index')->with("message", 'تم التعديل بنجاح');
     }
 
     // public function destroy(Request $request)
@@ -133,13 +97,13 @@ class SliderController extends Controller
     //     $delete = Slider::findOrFail($request->id);
     //     $delete->delete();
     //         return redirect()->route('sliders.index')->with("message",'تم الحذف بنجاح');
-    // }  
-    
+    // }
+
     public function destroy(Request $request)
     {
         $delete             = Slider::findOrFail($request->id);
         $image_path         = base_path("assets_admin/img/sliders/") .$delete->image;
-        
+
         if(File::exists($image_path)) {
             // unlink($image_path);
             File::delete($image_path);
@@ -147,7 +111,7 @@ class SliderController extends Controller
         else{
             $delete->delete();
         }
-        
+
         $delete->delete();
         return redirect()->route('sliders.index')->with("message",'تم الحذف بنجاح');
         // return response()->json(['success'=>'Slider deleted successfully!']);

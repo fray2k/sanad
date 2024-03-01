@@ -3,13 +3,13 @@
 
 <div class="content-header row">
 	<div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-		<h3 class="content-header-title mb-0 d-inline-block">نوع العقار</h3><br>
+		<h3 class="content-header-title mb-0 d-inline-block">التخصصات</h3><br>
 		<div class="row breadcrumbs-top d-inline-block">
 			<div class="breadcrumb-wrapper col-12">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">الرئيسية</a>
 					</li>
-					<li class="breadcrumb-item active">نوع العقار
+					<li class="breadcrumb-item active"> التخصصات
 					</li>
 				</ol>
 			</div>
@@ -65,9 +65,9 @@
 									<thead>
 										<tr>
 											<th>#</th>
-											<th class="text-center">نوع العاقر</th>
-											<!-- <th>التخصص انجليزي</th>
-											<th>الترتيب</th> -->
+											<th class="text-center">التخصص عربي</th>
+											<th>التخصص انجليزي</th>
+											<!-- <th>الترتيب</th> -->
 											<th class="text-center">العمليات</th>
 										</tr>
 									</thead>
@@ -79,12 +79,16 @@
 												{{$_item->id}}
 											</td>
 											<td class="text-center">
-												{{$_item->name}}
+												{{$_item->title_ar}}
+											</td>
+											<td class="text-center">
+												{{$_item->title_en}}
 											</td>
 											<td class="text-center">
 												<div class="actions">
 													<a class="btn btn-sm bg-success-light" data-toggle="modal"
-													data-name ="{{$_item->name}}"
+													data-title_ar ="{{$_item->title_ar}}"
+													data-title_en ="{{$_item->title_en}}"
 													data-catid="{{ $_item->id }}"
 													data-target="#edit">
 													<button type="button" class="btn btn-outline-success "><i class="la la-edit"></i></button>
@@ -125,8 +129,14 @@
 				<div class="row form-row">
 					<div class="col-12 col-sm-12">
 						<div class="form-group">
-							<label>نوع العقار</label>
-							<input type="text" name="name" class="form-control" value="{{old('name')}}">
+							<label>التخصص عربي </label>
+							<input type="text" name="title_ar" class="form-control" value="{{old('title_ar')}}">
+						</div>
+					</div>
+					<div class="col-12 col-sm-12">
+						<div class="form-group">
+							<label>التخصص انجليزي </label>
+							<input type="text" name="title_en" class="form-control" value="{{old('title_en')}}">
 						</div>
 					</div>
 				</div>
@@ -156,20 +166,19 @@
 
 					<div class="row form-row">
 						<input type="hidden" name="id" id="cat_id" >
-						<div class="col-12 col-sm-12">
+						<div class="col-12 col-sm-6">
 							<div class="form-group">
-								<label>نوع العقار</label>
-								<input type="text" name="name" class="form-control" id="name" >
-
-							</div>
-						</div>
-						<!-- <div class="col-12 col-sm-6">
-							<div class="form-group">
-								<label>التخصص انجليزي</label>
-								<input type="text" name="name_en" class="form-control" id="nameen" >
+								<label>التخصص عربي</label>
+								<input type="text" name="title_ar" class="form-control" id="titleAr" >
 							</div>
 						</div>
 						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>التخصص انجليزي</label>
+								<input type="text" name="title_en" class="form-control" id="titleEn">
+							</div>
+						</div>
+						<!--<div class="col-12 col-sm-6">
 							<div class="form-group">
 								<label>الترتيب</label>
 								<input type="text" name="num" class="form-control" id="num" >
@@ -239,7 +248,8 @@
 <script>
 $('#edit').on('show.bs.modal', function (event) {
 	var button = $(event.relatedTarget)
-	var name = button.data('name')
+	var titleAr = button.data('title_ar')
+	var titleEn = button.data('title_en')
 	// var name_en = button.data('name_en')
 	// var num = button.data('num')
 	// var icon = button.data('icon')
@@ -247,7 +257,9 @@ $('#edit').on('show.bs.modal', function (event) {
 	var cat_id = button.data('catid')
 	var modal = $(this)
 
-	modal.find('.modal-body #name').val(name);
+	modal.find('.modal-body #titleAr').val(titleAr);
+	modal.find('.modal-body #titleEn').val(titleEn);
+
 	// modal.find('.modal-body #nameen').val(name_en);
 	// modal.find('.modal-body #num').val(num);
 	// modal.find('.modal-body #icon').val(icon);

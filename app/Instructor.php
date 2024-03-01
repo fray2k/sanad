@@ -18,7 +18,7 @@ class Instructor extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name', 'email', 'password','is_activated','first_name','last_name','mobile','type'
     ];
-    
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -29,7 +29,7 @@ class Instructor extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
-    
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

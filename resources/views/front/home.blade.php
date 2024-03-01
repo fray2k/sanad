@@ -1,5 +1,14 @@
 @extends('layout.front.main')
 @section('content')
+@php
+  if(session()->get('locale')){
+    $langg=session()->get('locale');
+    App::setLocale($langg);
+  }else{
+    $langg=app()->getLocale();
+    App::setLocale($langg);
+  }
+@endphp
 <!-- start slider section -->
 <article class="slider">
     @foreach ($sliders as $_item)
@@ -34,12 +43,17 @@
                     <div class="col-12">
                         <h6 class="#course- text-extra-dark-gray font-weight-600 title-bg">
                             <!-- My Courses -->
-                           {{$category->title}}
+                            @if($langg=='ar')
+                              {{$category->title_ar}}
+                            @else
+                              {{$category->title_en}}
+                            @endif
+
                         </h6>
 
                     </div>
                 </div>
-                
+
                 <div class="row featured-courses">
                     <!-- start features box item -->
                     @foreach ($category->courses as $_item)
@@ -51,7 +65,12 @@
 
                         <a href="{{url('course/'.$_item->slug.'/'.$_item->id)}}">
                             <div class="bg-light">
-                                <p class="text-dark font-weight-bold mb-2"> {{$_item->title}}
+                                <p class="text-dark font-weight-bold mb-2">
+                                  @if($langg=='ar')
+                                    {{$_item->title_ar}}
+                                  @else
+                                    {{$_item->title_en}}
+                                  @endif
                                 </p>
                                 <div class="featured-date mb-2">
                                     <!-- <i class="fas fa-user "></i> -->
@@ -71,13 +90,13 @@
                     @endforeach
                     <!-- end features box item -->
 
-                   
+
                 </div>
             </div>
             @endforeach
             <!-- ١ end My Courses -->
-          
-        
+
+
             <!-- </main> -->
         <!-- </div> -->
 
@@ -138,7 +157,7 @@
                                         </div>
 
                                     </div>
-                                </a> 
+                                </a>
                         </div>
                     </div>
 

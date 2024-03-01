@@ -19,7 +19,7 @@ use Auth;
 class InstructorLoginController extends Controller
 {
     public function UserLogin()
-    {   
+    {
         $user = Auth::guard('instructors')->user();
         if($user)
             return redirect('/');
@@ -43,41 +43,90 @@ class InstructorLoginController extends Controller
         if($checkinstructor){
             if($checkinstructor->is_activated ==0)
             {
-                return redirect('user-login')->with("errorss", 'الحساب غير مفعل'); 
+                return redirect('user-login')->with("errorss", 'الحساب غير مفعل');
             }else{
                 $good = Auth::guard('instructors') -> attempt($credentials);
                 if($good) {
                     if($checkinstructor->type='instructor'){
-                        return redirect('instructor/courses');    
+                        return redirect('instructor/courses');
                     }else{
-                        return redirect('home');   
-                    }              
+                        return redirect('home');
+                    }
                 }else{
-                    return redirect('user-login')->with("errorss", 'بيانات الدخول غير صحيحةة'); 
+                    return redirect('user-login')->with("errorss", 'بيانات الدخول غير صحيحةة');
                 }
             }
         }else{
-            return redirect('user-login')->with("errorss", 'بيانات الدخول غير صحيحة'); 
+            return redirect('user-login')->with("errorss", 'بيانات الدخول غير صحيحة');
         }
     }
 
-    
-  
+
+
     public function instructorSignup()
-    {   
+    {
         $user = Auth::guard('instructors')->user();
         if($user)
-            return redirect('/');          
+            return redirect('/');
         return view('front.instructor-signup');
     }
     public function studentSignup()
-    {   
+    {
         $user = Auth::guard('instructors')->user();
         if($user)
-            return redirect('/');          
+            return redirect('/');
         return view('front.student-signup');
     }
+    public function registerNewUser(Request $request)
+    {
 
+        $user = Auth::guard('instructors')->user();
+        if($user)
+            return redirect('/');
+
+        // if($request->type !="instructor"){
+            $this->validate(request(),[
+                    'first_name'    => 'required|min:3',
+                    'last_name'    => 'required|min:3',
+                    'email'    => 'required|email',
+                    'password' => 'required|min:3',
+                    'confirm_password' => 'required|same:password',
+                    'mobile' => 'required',
+                ],
+                [
+                    'first_name.required'=>'الاسم الاول مطلوب',
+                    'last_name.required'=>'الاسم الثاني مطلوب',
+                    'email.required'=>' البريد  الإلكتروني مطلوب',
+                    'email.email'=>'يجب أن يكون من نوع بريد إلكتروني',
+                    'password.required'=>' كلمة المرور مطلوبة',
+                    'confirm_password.required'=>' يرجى إعادة كلمة المرور ',
+                    'mobile.required'=>'رقم الهاتف مطلوب',
+                ]
+            );
+        // }
+        // dd('dd');
+        $checkemail = Instructor::where("email" , $request->email)->first();
+        if($checkemail){
+            if(isset($request->lang)  && $request -> lang == 'en' ){
+                return back()->with("errorss", 'Email already exists');
+            }else{
+                return back()->with("errorss", 'البريد الإلكتروني موجود مسبقا');
+            }
+        }else{
+            $add = new Instructor();
+            $add->name  = $request->first_name .' '. $request->last_name;     
+            $add->first_name  = $request->first_name;
+            $add->last_name  = $request->last_name;
+            $add->email  = $request->email;
+            $add->password  = bcrypt($request->password);
+            $add->mobile  = $request->mobile;
+            $add->type  = 'student';
+            $add->save();
+            return redirect('user-login')->with("message", 'تم التسجيل بنجاح');
+        }
+
+
+    }
     public function instructorActivation($token){
         $check = DB::table('user_activations')->where('token',$token)->first();
         if(!is_null($check)){
@@ -185,7 +234,7 @@ class InstructorLoginController extends Controller
 ## end for api
 
     public function signOutInstructors() {
-        $user = Auth::guard('instructors')->user(); 
+        $user = Auth::guard('instructors')->user();
         if(!$user)
             return redirect('user-login');
         Auth::guard('instructors')->logout();
